@@ -1,5 +1,5 @@
 
-![logo](https://raw.githubusercontent.com/kladdy/master-project/master/logistics/LogoV3.pdf)
+![logo](https://github.com/Kladdy/master-project/raw/main/logistics/LogoV3.pdf)
 
 # Master Project
 
