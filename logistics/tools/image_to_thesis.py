@@ -31,10 +31,22 @@ def pull_from_thesis():
     print(f"pull_from_thesis: Done")
 
 def push_to_thesis():
+    pull_from_thesis()
     print(f"push_to_thesis: Pushing to master-thesis repository")
     repo = Repo(os.path.join(root_git_dir(), '..', 'master-thesis'))
-    repo.git.add(update=True, A=True)
+    repo.git.add(all=True)
     repo.index.commit('Update images')
     origin = repo.remote(name='origin')
     origin.push()
     print(f"push_to_thesis: Done")
+
+def save(plt, section: ThesisSection, filename: str):
+    print(f"save: Saving {filename} to {section.value}")
+
+    # Make sure the folder exists
+    path = os.path.join(section_img_dir(section), filename)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
+    plt.savefig(path)
+
+    push_to_thesis()
