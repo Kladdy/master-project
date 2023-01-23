@@ -7,7 +7,7 @@
   <cell id="5" material="2" region="3 -4" universe="4" />
   <cell fill="3" id="6" region="-3" universe="4" />
   <hex_lattice id="3" n_rings="9">
-    <pitch>6</pitch>
+    <pitch>12</pitch>
     <outer>2</outer>
     <center>0.0 0.0</center>
     <universes>
@@ -47,6 +47,6 @@
   </hex_lattice>
   <surface coeffs="0.0 0.0 5" id="1" type="z-cylinder" />
   <surface coeffs="0.0 0.0 5" id="2" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 70" id="3" type="z-cylinder" />
-  <surface boundary="vacuum" coeffs="0.0 0.0 73" id="4" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 120" id="3" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 125" id="4" type="z-cylinder" />
 </geometry>
