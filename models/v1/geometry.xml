@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<geometry>
+  <cell id="1" material="1" region="-1" universe="1" />
+  <cell id="2" material="2" region="1 -2" universe="1" />
+  <cell id="3" material="3" region="2" universe="1" />
+  <cell id="4" material="3" universe="2" />
+  <cell id="5" material="2" region="3 -4" universe="4" />
+  <cell fill="3" id="6" region="-3" universe="4" />
+  <hex_lattice id="3" n_rings="9">
+    <pitch>6</pitch>
+    <outer>2</outer>
+    <center>0.0 0.0</center>
+    <universes>
+        1
+       1 1
+      1 1 1
+     1 1 1 1
+    1 1 1 1 1
+   1 1 1 1 1 1
+  1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+  1 1 1 1 1 1 1
+   1 1 1 1 1 1
+    1 1 1 1 1
+     1 1 1 1
+      1 1 1
+       1 1
+        1</universes>
+  </hex_lattice>
+  <surface coeffs="0.0 0.0 5" id="1" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 5" id="2" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 70" id="3" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 73" id="4" type="z-cylinder" />
+</geometry>
