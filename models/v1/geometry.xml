@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <geometry>
-  <cell id="1" material="1" name="fuel" region="-3" universe="1" />
-  <cell id="2" material="2" name="cladding" region="3 -4" universe="1" />
-  <cell id="3" material="3" name="moderator" region="4" universe="1" />
-  <cell id="4" material="3" universe="2" />
+  <cell id="1" material="1" name="fuel" region="-3 1 -2" universe="1" />
+  <cell id="2" material="2" name="cladding" region="3 -4 1 -2" universe="1" />
+  <cell id="3" material="3" name="moderator" region="4 1 -2" universe="1" />
+  <cell id="4" material="3" name="outer" universe="2" />
   <cell id="5" material="2" name="containment" region="(7 -8 1 -2) | (-7 ((1 -5) | (-2 6)))" universe="4" />
   <cell fill="3" id="6" region="-7 5 -6" universe="4" />
   <hex_lattice id="3" n_rings="10" orientation="x">
