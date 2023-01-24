@@ -1,6 +1,8 @@
 # - Date: 24/01/2023
 # - Based on: Model v1
 
+DO_PLOT = False
+
 import openmc
 import numpy as np
 import matplotlib.pyplot as plt
@@ -124,29 +126,78 @@ geometry.export_to_xml()
 
 
 # @@@@@@@@@@@@@@@@@@@@@@ Plots @@@@@@@@@@@@@@@@@@@@@@
+if DO_PLOT:
+    PLOT_COLOR_BY = 'material'
+    PLOT_PIXELS = (1000, 1000)
+    PLOT_FUEL_COLOR = 'yellowgreen'
+    PLOT_CLADDING_COLOR = 'lightslategray'
+    PLOT_MODERATOR_COLOR = 'midnightblue'
 
-PLOT_COLOR_BY = 'material'
-PLOT_PIXELS = (1000, 1000)
-PLOT_FUEL_COLOR = 'yellowgreen'
-PLOT_CLADDING_COLOR = 'lightslategray'
-PLOT_MODERATOR_COLOR = 'midnightblue'
+    colors = {
+        material_fuel: PLOT_FUEL_COLOR,
+        material_cladding: PLOT_CLADDING_COLOR,
+        material_moderator: PLOT_MODERATOR_COLOR
+    }
 
-colors = {
-    material_fuel: PLOT_FUEL_COLOR,
-    material_cladding: PLOT_CLADDING_COLOR,
-    material_moderator: PLOT_MODERATOR_COLOR
-}
+    plotXY = openmc.Plot.from_geometry(geometry, basis='xy')
+    plotXY.color_by = PLOT_COLOR_BY
+    plotXY.filename = 'plotXY'
+    plotXY.pixels = PLOT_PIXELS
+    plotXY.colors = colors
+    plotXY.to_ipython_image()
 
-plotXY = openmc.Plot.from_geometry(geometry, basis='xy')
-plotXY.color_by = PLOT_COLOR_BY
-plotXY.filename = 'plotXY'
-plotXY.pixels = PLOT_PIXELS
-plotXY.colors = colors
-plotXY.to_ipython_image()
+    plotXZ = openmc.Plot.from_geometry(geometry, basis='xz')
+    plotXZ.color_by = PLOT_COLOR_BY
+    plotXZ.filename = 'plotXZ'
+    plotXZ.pixels = PLOT_PIXELS
+    plotXZ.colors = colors
+    plotXZ.to_ipython_image()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-plotXZ = openmc.Plot.from_geometry(geometry, basis='xz')
-plotXZ.color_by = PLOT_COLOR_BY
-plotXZ.filename = 'plotXZ'
-plotXZ.pixels = PLOT_PIXELS
-plotXZ.colors = colors
-plotXZ.to_ipython_image()
+
+
+# @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
+point = openmc.stats.Point((0, 0, 0))
+src = openmc.Source(space=point)
+
+settings = openmc.Settings()
+settings.source = src
+settings.batches = 100
+settings.inactive = 10
+settings.particles = 5000
+settings.export_to_xml()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+# @@@@@@@@@@@@@@@@@@@@@@ Tallies @@@@@@@@@@@@@@@@@@@@@@
+
+# Tally 1: energy spectrum in fuel
+cell_filter1 = openmc.CellFilter(cell_fuel)
+energybins = np.logspace(-2, 7, 1001) #1000 bins between 1e-2 eV and 1e7 eV
+energy_filter = openmc.EnergyFilter(energybins)
+
+tally1 = openmc.Tally(1)
+tally1.filters = [cell_filter1,energy_filter]
+tally1.scores = ['flux','fission']
+# END Tally 1
+
+# Tally 2: energy spectrum in moderator
+cell_filter2 = openmc.CellFilter(cell_moderator)
+
+tally2 = openmc.Tally(2)
+tally2.filters = [cell_filter2,energy_filter]
+tally2.scores = ['flux']
+# END Tally 2
+
+# Export
+tallies = openmc.Tallies([tally1, tally2])
+tallies.export_to_xml()
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+# Run OpenMC
+os.system('rm s*h5') # Remove old files
+openmc.run()
