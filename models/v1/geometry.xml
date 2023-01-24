@@ -1,42 +1,42 @@
 <?xml version='1.0' encoding='utf-8'?>
 <geometry>
-  <cell id="1" material="1" name="fuel" region="-3 1 -2" universe="1" />
-  <cell id="2" material="2" name="cladding" region="3 -4 1 -2" universe="1" />
-  <cell id="3" material="3" name="moderator" region="4 1 -2" universe="1" />
-  <cell id="4" material="3" name="outer" universe="2" />
-  <cell id="5" material="2" name="containment" region="(7 -8 1 -2) | (-7 ((1 -5) | (-2 6)))" universe="4" />
-  <cell fill="3" id="6" region="-7 5 -6" universe="4" />
-  <hex_lattice id="3" n_rings="10" orientation="x">
-    <pitch>12</pitch>
-    <outer>2</outer>
+  <cell id="7" material="1" name="fuel" region="-11 9 -10" universe="5" />
+  <cell id="8" material="2" name="cladding" region="11 -12 9 -10" universe="5" />
+  <cell id="9" material="3" name="moderator" region="12 9 -10" universe="5" />
+  <cell id="10" material="3" name="outer" universe="6" />
+  <cell id="11" material="2" name="containment" region="(15 -16 9 -10) | (-15 ((9 -13) | (-10 14)))" universe="8" />
+  <cell fill="7" id="12" region="-15 13 -14" universe="8" />
+  <hex_lattice id="7" n_rings="10" orientation="x">
+    <pitch>13</pitch>
+    <outer>6</outer>
     <center>0.0 0.0</center>
     <universes>
-         2 2 2 1 1 1 1 2 2 2
-        2 1 1 1 1 1 1 1 1 1 2
-       2 1 1 1 1 1 1 1 1 1 1 2
-      1 1 1 1 1 1 1 1 1 1 1 1 1
-     1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-   1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-  2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
- 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
-2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
- 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
-  2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
-   1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-     1 1 1 1 1 1 1 1 1 1 1 1 1 1
-      1 1 1 1 1 1 1 1 1 1 1 1 1
-       2 1 1 1 1 1 1 1 1 1 1 2
-        2 1 1 1 1 1 1 1 1 1 2
-         2 2 2 1 1 1 1 2 2 2</universes>
+         6 6 6 5 5 5 5 6 6 6
+        6 5 5 5 5 5 5 5 5 5 6
+       6 5 5 5 5 5 5 5 5 5 5 6
+      5 5 5 5 5 5 5 5 5 5 5 5 5
+     5 5 5 5 5 5 5 5 5 5 5 5 5 5
+    5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+   5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+  6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6
+ 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6
+6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6
+ 6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6
+  6 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 6
+   5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+    5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+     5 5 5 5 5 5 5 5 5 5 5 5 5 5
+      5 5 5 5 5 5 5 5 5 5 5 5 5
+       6 5 5 5 5 5 5 5 5 5 5 6
+        6 5 5 5 5 5 5 5 5 5 6
+         6 6 6 5 5 5 5 6 6 6</universes>
   </hex_lattice>
-  <surface boundary="vacuum" coeffs="-100.0" id="1" type="z-plane" />
-  <surface boundary="vacuum" coeffs="100.0" id="2" type="z-plane" />
-  <surface coeffs="0.0 0.0 5" id="3" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 5" id="4" type="z-cylinder" />
-  <surface boundary="vacuum" coeffs="-95.0" id="5" type="z-plane" />
-  <surface boundary="vacuum" coeffs="95.0" id="6" type="z-plane" />
-  <surface coeffs="0.0 0.0 120" id="7" type="z-cylinder" />
-  <surface boundary="vacuum" coeffs="0.0 0.0 125" id="8" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="-100.0" id="9" type="z-plane" />
+  <surface boundary="vacuum" coeffs="100.0" id="10" type="z-plane" />
+  <surface coeffs="0.0 0.0 5" id="11" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 6" id="12" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="-95.0" id="13" type="z-plane" />
+  <surface boundary="vacuum" coeffs="95.0" id="14" type="z-plane" />
+  <surface coeffs="0.0 0.0 120" id="15" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 125" id="16" type="z-cylinder" />
 </geometry>
