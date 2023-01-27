@@ -1,0 +1,66 @@
+-- read the input (tape20), apply moder:
+-- MODER converts the input coded (ASCII) ENDF (positive tape no.) tape to binary (negative tape no.) ENDF tape.
+-- Negative unit number means binary mode (should speed things up for internal data handling)
+moder
+ 20 -21 /
+-- read the output of moder (tape21), apply reconr:
+-- reconr reconstructs the resonance cross sections
+reconr
+ -21 -22 /
+ 'processing of an example nuclide.'/
+ 9228 1 0 /                             9228 is the material number (present in ENDF file)
+ 0.001 0. /                             Required accuracy: 0.01%
+'ENDF data processed with NJOY.'/
+ 0 /
+-- Read the output of reconr (tape21), apply broadr:
+broadr
+ -21 -22 -23 /
+ 9228 1 0 0 0 /                         9228 is the material number
+ 0.001 /                                Again, require 0.01% accuracy
+ 773.15 /                                        The temperature (773.15 K)
+ 0 /
+-- UNRESR:
+unresr
+ -21 -23 -24 /
+ 9228 1 6 1 /
+ 773.15 /
+ 1e10 1e4 1e3 1e2 10 1 /                As per JEFF 3.3 paper, the background-XS levels (1e10 = infty as per NJOY manual)
+ 0 /
+-- THERMR (as specified in JEFF 3.3 paper (https://doi.org/10.1140/epja/s10050-020-00141-9)
+thermr
+ 0 -24 -25 /
+ 0 9228 20 1 1 0 0 1 221 1 /            20 equi-probable angles
+ 773.15 /
+ 0.001 10 /                             tolerance 0.1%, maximum energy for thermal treatment 10 eV
+-- PURR:
+purr
+ -21 -25 -26 /
+ 9228 1 6 20 32 1 /             Following the sandy example input in njoy_test.py
+ 773.15 /
+ 1e10 1e4 1e3 1e2 10 1 /                As per JEFF 3.3 paper, the background-XS levels (sigma zero vals) (1e10 = infty as per NJOY manual)
+ 0 /
+-- Run MODER again to produce an ASCII pendf file from the reconstructed and broadened data:
+moder
+ -26 30 /
+-- Run ERRORR to produce a covariance data file
+-- process mf33 with internal group averaging
+-- since there is no groupr input tape.
+errorr
+ -21 -26 0 45 0 0 /
+ 9228 3 6 1 1 /
+ 0 773.15 /
+ 0 33 1 /
+-- make mf33 plot file.
+covr
+ 45 0 55
+ 1 /
+ /
+ 1 4 /
+ 9228   1   9228   1 / Plot total cross section (MT 1) vs total cross section (MT 1)
+ 9228   1   9228   2 / Plot total cross section (MT 1) vs elastic cross section (MT 2)
+ 9228   2   9228   2 /
+ 9228   2   9228   4 /
+-- make mf33 postscript file.
+viewr
+ 55 65 /
+stop

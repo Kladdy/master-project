@@ -1,0 +1,38 @@
+Step 1: ~/NJOY21/bin/njoy21 -i input1
+Step 2: sandy tape20 --mf {31,34,35} --seed31 1 --seed34 1 --seed35 1 --samples 2
+Step 3: sandy tape30 --cov tape45 --seed33 1 --samples 2
+Step 4: cp tape20-1 tape95
+Step 5: cp tape30-1 tape96
+Step 6: ~/NJOY21/bin/njoy21 -i input2
+
+Resulting (perturbed) ACE file is tape70
+
+
+Explanation:
+An ENDF file contains a large amount of data for a particular nucleus. The data are divided into data blocks - "files" (file number = MF), which are then sub-divided into reactions (reaction number = MT). For example, MF = 3 are reaction cross sections and MT = 1 (still under MF = 3) is the total cross section, MT = 2 is the elastic-scattering cross section etc. (See the ENDF-6 manual on https://www.nndc.bnl.gov/csewg/docs/endf-manual.pdf for details). In your case, the ENDF files are for incident neutrons, so all the data are for neutron-induced reactions.
+
+Some file numbers of interest to you are:
+MF = 1 - some general stuff, but includes e.g. the number of neutrons emitted per fission
+MF = 2 - the resonance parameters
+MF = 3 - the reaction cross sections
+MF = 4 - the angular distributions of outgoing particles
+MF = 5 - the energy distributions of outgoing particles
+
+In addition to these quantities, the ENDF file also contains covariances for the parameters. These are stored in files MF = 31 (covariances for MF=1 data), 32 (covariances for MF=2 data), 33, 34, 35 etc. These we want to sample to propagate uncertainties. SANDY does this by looking at the data in MF=31 (for fission neutrons), MF=33 (for cross sections), MF=34 (for angular distributions), MF=35 (for energy distributions). Note that sampling MF=33 (as SANDY does) does not include the resonance-parameter covariances in MF=32. These we want to include, and therefore need an extra step in the data processing.
+
+Step 1: Run NJOY on input file input1. This produces 
+i) a "pointwise ENDF (PENDF) file" called tape30. This contains the cross section as a function of energy (and includes all resonance peaks, the unresolved region, ..., i.e. the fully reconstructed cross sections vs energy). 
+ii) an "ERRORR file" called tape45, which contains the covariance data for the reconstructed cross section data (i.e. the covariance for the data in the PENDF file). 
+iii) a PostScript file called tape65, which can be viewed in a document (e.g. PDF) viewer. This shows the cross section and correlation matrix for whichever reactions you want. You can select which cross sections to plot under the covr module.
+
+Step 2: Run SANDY to create perturbed ENDF files (i.e. ENDF files which account for covariances in MF=31, 34 and 35, *NOT* covariances in the cross sections). The input is the original ENDF file (so, tape20), and the outputs will be called tape20-1, tape20-2, ...
+
+Step 3: Run SANDY to create perturbed PENDF files (i.e. PENDF files which *do account* for covariances in MF=32 and MF=33, i.e. the covariances in the cross sections which are contained in the ERRORR file tape45). The input is the unperturbed PENDF file (so, tape30), and the outputs will be called tape30-1, tape30-2, ... NOTE: these outputs are *not* ENDF files like the outputs from step 2, but contain the reconstructed and perturbed cross section data.
+
+Step 4: Copy one of the SANDY ENDF outputs (from step 2), tape20-1, to tape95
+
+Step 5: Copy one of the SANDY PENDF outputs (from step 3), tape30-1, to tape96
+
+Step 6: Run NJOY on input file input2. This brings together tape95 (the perturbed ENDF file, which accounts for MF=31, 34 and 35) and tape96 (the perturbed PENDF file, which accounts for MF=32 and 33, i.e. the cross section data), and produces an ACE file called tape70. This should include all perturbations you want, and can be used in e.g. Serpent.
+
+You'll need to run steps 4-6 for all SANDY outputs (i.e. perturbed file 1, 2, 3, 4, ...)

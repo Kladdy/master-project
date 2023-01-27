@@ -1,0 +1,14 @@
+-- read the input ENDF (tape95), and PENDF (tape96), convert to internal format using moder:
+moder
+ 95 -21 /
+moder
+ 96 -23 /
+-- Produce the ACE file:
+acer
+-21 -23 0 70 80 /
+1 0 1 .02 0 /
+'My ACE file'/
+9228 773.15 /                                    Material number and temperature
+1 1 /
+/
+stop
