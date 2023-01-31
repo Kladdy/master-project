@@ -1,0 +1,128 @@
+1*****************************************************************************
+ *                                         *              *                  *
+ *   $$   $$       $$   $$$$$   $$    $$   *              *  vers: 2016.68   *
+ *   $$$  $$       $$  $$$$$$$   $$  $$    *  nuclear     *  vday: 30Sep22   *
+ *   $$$$ $$       $$  $$   $$    $$$$     *  data        *  site: lanl t2   *
+ *   $$ $$$$  $$   $$  $$   $$     $$      *  processing  *  mach:           *
+ *   $$  $$$  $$$$$$$  $$$$$$$     $$      *  system      *  date: 01/27/23  *
+ *   $$   $$   $$$$$    $$$$$      $$      *              *  time: 14:27:21  *
+ *                                         *              *                  *
+ *****************************************************************************
+
+ moder...change the mode of an endf tape or njoy output tape              0.0s
+
+ input unit (+ for coded, - for bb) ...         20
+ output unit (+ for coded, - for bb) ..        -21
+
+ tape label
+ --------------------------------------
+  JEFF-3.3 Incident Neutron File                                      
+
+ using endf-6 format
+                                                                          0.1s
+ *****************************************************************************
+
+ reconr...reconstruct pointwise cross sections in pendf format            0.1s
+
+ unit for endf tape ...................        -21
+ unit for pendf tape ..................        -22
+
+ label for pendf tape
+ ------------------------------------------------------------------
+ processing of an example nuclide.                                   
+
+ tape label
+ ------------------------------------------------------------------
+ JEFF-3.3 Incident Neutron File                                      
+
+ material to be processed .............       9228
+ reconstruction tolerance .............      0.001
+ reconstruction temperature ...........       0.00k
+ resonance-integral-check tolerance ...      0.010
+ max resonance-integral error .........  5.000E-08
+
+ descriptive cards for pendf tape
+ ------------------------------------------------------------------
+ ENDF data processed with NJOY.                                      
+ 
+
+ processing mat 9228 in endf-6 format
+ ------------------------------------------------------------------
+  92-U -235 IRSN-CEA   EVAL-DEC14 IRSN-CEA DAM/DEN COLLAB.           
+
+ resonance range information
+ ----------------------------------
+ ier     energy-range     lru lrf  method
+  1  1.000E-05 2.250E+03   1   3   normal
+  2  2.250E+03 4.620E+04   2   2   normal
+
+ ---message from rdf2bw---calculation of angular distribution not installed.
+   samm max legendre order:  0
+
+ changed threshold from 5.320220E+06 to 5.320225E+06 for mt 16.
+
+ changed threshold from 4.416410E+05 to 4.416413E+05 for mt 24.
+
+ changed threshold from 6.738500E+06 to 6.738505E+06 for mt 28.
+
+ changed threshold from 1.198110E+07 to 1.198111E+07 for mt 41.
+
+ changed threshold from 1.853820E+07 to 1.853822E+07 for mt 42.
+
+ changed threshold from 7.733040E+01 to 7.733045E+01 for mt 51.
+
+ changed threshold from 1.034740E+05 to 1.034743E+05 for mt 56.
+
+ changed threshold from 1.298520E+05 to 1.298520E+05 for mt 57.
+
+ changed threshold from 1.721230E+05 to 1.721236E+05 for mt 60.
+
+ changed threshold from 2.263840E+05 to 2.263845E+05 for mt 62.
+
+ changed threshold from 2.501990E+05 to 2.501992E+05 for mt 63.
+
+ changed threshold from 2.923890E+05 to 2.923895E+05 for mt 64.
+
+ changed threshold from 2.959180E+05 to 2.959186E+05 for mt 65.
+
+ changed threshold from 3.342700E+05 to 3.342705E+05 for mt 66.
+
+ changed threshold from 3.588330E+05 to 3.588334E+05 for mt 68.
+
+ changed threshold from 3.686470E+05 to 3.686473E+05 for mt 69.
+
+ changed threshold from 3.949000E+05 to 3.949005E+05 for mt 71.
+
+ changed threshold from 4.165430E+05 to 4.165430E+05 for mt 72.
+
+ changed threshold from 4.285780E+05 to 4.285784E+05 for mt 73.
+
+ changed threshold from 4.404820E+05 to 4.404823E+05 for mt 74.
+
+ changed threshold from 4.564500E+05 to 4.564505E+05 for mt 76.
+
+ changed threshold from 4.763360E+05 to 4.763365E+05 for mt 78.
+
+ changed threshold from 4.870810E+05 to 4.870814E+05 for mt 79.
+
+ changed threshold from 5.121080E+05 to 5.121084E+05 for mt 80.
+
+ changed threshold from 1.175021E+06 to 1.175022E+06 for mt 81.
+
+ changed threshold from 1.255364E+06 to 1.255365E+06 for mt 82.
+
+ changed threshold from 1.446180E+06 to 1.446181E+06 for mt 83.
+
+ changed threshold from 1.596823E+06 to 1.596824E+06 for mt 84.
+
+ changed threshold from 1.757510E+06 to 1.757511E+06 for mt 85.
+
+ changed threshold from 1.857939E+06 to 1.857940E+06 for mt 86.
+
+ changed threshold from 1.958368E+06 to 1.958369E+06 for mt 87.
+
+ changed threshold from 2.159226E+06 to 2.159227E+06 for mt 88.
+
+ changed threshold from 2.309870E+06 to 2.309871E+06 for mt 89.
+
+ changed threshold from 3.402539E+06 to 3.402540E+06 for mt 90.
