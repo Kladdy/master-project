@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<geometry>
+  <cell id="15" material="2" name="cladding" region="19 -20 17 -18" universe="13" />
+  <cell id="16" material="3" name="moderator" region="-19 17 -18" universe="13" />
+  <cell id="17" material="1" name="fuel" region="20 17 -18" universe="13" />
+  <cell id="18" material="1" name="outer" universe="14" />
+  <cell fill="15" id="19" name="lattice_inner" universe="16" />
+  <cell id="20" material="2" name="containment" region="(23 -24 17 -18) | (-23 ((17 -21) | (-18 22)))" universe="18" />
+  <cell fill="17" id="21" region="-23 21 -22" universe="18" />
+  <lattice id="15">
+    <pitch>3 3</pitch>
+    <dimension>7 7</dimension>
+    <lower_left>-10.5 -10.5</lower_left>
+    <universes>
+14 14 14 14 14 14 14 
+14 14 14 14 14 14 14 
+14 14 13 14 13 14 14 
+14 14 14 14 14 14 14 
+14 14 13 14 13 14 14 
+14 14 14 14 14 14 14 
+14 14 14 14 14 14 14 </universes>
+  </lattice>
+  <lattice id="17">
+    <pitch>15 15</pitch>
+    <dimension>20 20</dimension>
+    <lower_left>-150.0 -150.0</lower_left>
+    <universes>
+14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 
+14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 
+14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 16 16 16 16 16 16 16 16 16 16 16 16 16 16 14 14 14 
+14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 
+14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 
+14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 </universes>
+  </lattice>
+  <surface boundary="vacuum" coeffs="-100.0" id="17" type="z-plane" />
+  <surface boundary="vacuum" coeffs="100.0" id="18" type="z-plane" />
+  <surface coeffs="0.0 0.0 1.15" id="19" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 1.25" id="20" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="-95.0" id="21" type="z-plane" />
+  <surface boundary="vacuum" coeffs="95.0" id="22" type="z-plane" />
+  <surface coeffs="0.0 0.0 120" id="23" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 125" id="24" type="z-cylinder" />
+</geometry>

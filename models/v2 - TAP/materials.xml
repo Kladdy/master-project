@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<materials>
+  <material depletable="true" id="1" name="ULiF" temperature="900">
+    <density units="g/cm3" value="5.01" />
+    <nuclide name="U235" wo="0.0311" />
+    <nuclide name="U238" wo="0.5909" />
+    <nuclide name="Li7" wo="0.048358" />
+    <nuclide name="Li6" wo="2.418e-06" />
+    <nuclide name="F19" wo="0.32964" />
+  </material>
+  <material id="2" name="ZrH" temperature="900">
+    <density units="g/cm3" value="5.66" />
+    <nuclide name="Zr90" wo="0.49793" />
+    <nuclide name="Zr91" wo="0.1098" />
+    <nuclide name="Zr92" wo="0.16967" />
+    <nuclide name="Zr94" wo="0.17569" />
+    <nuclide name="Zr96" wo="0.028908" />
+    <nuclide name="H1" wo="0.018007" />
+    <nuclide name="H2" wo="4.1389e-06" />
+  </material>
+  <material id="3" name="CSi" temperature="900">
+    <density units="g/cm3" value="3.21" />
+    <nuclide name="C0" wo="0.29936" />
+    <nuclide name="Si28" wo="0.64365" />
+    <nuclide name="Si29" wo="0.033866" />
+    <nuclide name="Si30" wo="0.02312" />
+  </material>
+</materials>
