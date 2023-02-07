@@ -44,3 +44,12 @@ def dump_run_settings_json(data: dict):
     with open('run_settings.json', 'w') as outfile:
         json.dump(data, outfile, indent=4)
     
+def load_run_settings_json(path: str):
+    with open(f'{path}/run_settings.json', 'r') as infile:
+        data = json.load(infile)
+    return data
+
+
+def get_all_result_dirs():
+    result_folders = [name for name in os.listdir("../results") if os.path.isdir(f"../results/{name}")]
+    return result_folders

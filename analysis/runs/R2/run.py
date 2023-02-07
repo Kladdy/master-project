@@ -49,7 +49,8 @@ CONTAINMENT_THICKNESS = 25 # cm -> total 175 cm radius, -> 350 cm diameter
 # Core properties
 CORE_HEIGHT = 300 # cm
 
-
+# Run properties
+INACTIVE_BATCHES = 50
 
 # @@@@@@@@@@@@@@@@@@@@@@ Materials @@@@@@@@@@@@@@@@@@@@@@
 # Fuel
@@ -318,8 +319,8 @@ for particle_count in particle_counts:
 
         settings = openmc.Settings()
         settings.source = src
-        settings.batches = active_batch_count + 50
-        settings.inactive = 50
+        settings.batches = active_batch_count + INACTIVE_BATCHES
+        settings.inactive = INACTIVE_BATCHES
         settings.particles = particle_count
         settings.export_to_xml()
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -340,6 +341,7 @@ for particle_count in particle_counts:
             "FAST_REACTOR": FAST_REACTOR,
             "particle_count": particle_count,
             "active_batch_count": active_batch_count,
+            "inactive_batch_count": INACTIVE_BATCHES,
             "t_start": round(t_start, 3),
             "t_end": round(t_end, 3),
             "t_elapsed": round(t_end - t_start, 3),
