@@ -17,7 +17,6 @@
     <nuclide name="Zr96" wo="0.028908" />
     <nuclide name="H1" wo="0.018007" />
     <nuclide name="H2" wo="4.1389e-06" />
-    <sab name="c_H_in_ZrH" />
   </material>
   <material id="3" name="CSi" temperature="900">
     <density units="g/cm3" value="3.21" />
