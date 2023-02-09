@@ -1,6 +1,8 @@
 /.DS_Store
 
 RUNDATA_*
+
+# Ignore .h5, .xml and .out
 *.h5
 *.xml
 *.out
