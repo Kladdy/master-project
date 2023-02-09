@@ -1,3 +1,6 @@
 /.DS_Store
 
 RUNDATA_*
+*.h5
+*.xml
+*.out

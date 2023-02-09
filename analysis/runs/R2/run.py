@@ -21,7 +21,7 @@ import time
 # print(run_tools.get_next_run_number())
 # raise Exception("STOP")
 
-FAST_REACTOR = False # True if epithermal, False if thermal
+FAST_REACTOR = True # True if epithermal, False if thermal
 
 # Fuel properties
 FUEL_TEMP = 900 # K

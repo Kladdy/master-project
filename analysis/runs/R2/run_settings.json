@@ -1,9 +1,9 @@
 {
-    "FAST_REACTOR": false,
+    "FAST_REACTOR": true,
     "particle_count": 300000,
-    "active_batch_count": 1000,
+    "active_batch_count": 3000,
     "inactive_batch_count": 50,
-    "t_start": 1675798260.082,
-    "t_end": 1675802145.21,
-    "t_elapsed": 3885.128
+    "t_start": 1675870224.271,
+    "t_end": 1675878844.477,
+    "t_elapsed": 8620.206
 }
