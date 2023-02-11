@@ -14,7 +14,7 @@ from tools import run_tools
 import time
 import random
 
-FAST_REACTOR = False # True if epithermal, False if thermal
+FAST_REACTOR = True # True if epithermal, False if thermal
 
 # Fuel properties
 FUEL_TEMP = 900 # K
