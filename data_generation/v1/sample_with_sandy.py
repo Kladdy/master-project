@@ -5,7 +5,8 @@
 # - Based on sample_sandy from the OpenMC data repository
 
 # Run as 
-# python sample_with_sandy.py -samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/JEFF33-n-endf6/sandy_rand
+# python sample_with_sandy.py --samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/JEFF33-n-endf6/sandy_rand
+# python sample_with_sandy.py --samples 10 -n F19 -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_rand
 
 import argparse
 import glob
@@ -82,8 +83,10 @@ format_only = args.format_only
 # ==============================================================================
 # CHECK IF REQUEST IS VALID AND IF ENDF FILES EXIST
 
-prefix = "n-"
-suffix = ".endf"
+# prefix = "n-"
+# suffix = ".endf"
+prefix = ""
+suffix = ".jeff33"
 
 atomic_dict = openmc.data.ATOMIC_NUMBER
 nuc_dict = {}
@@ -110,6 +113,8 @@ for nuc in nuclides:
         "atomic_num": atomic_num,
         "file_name": file_name,
     }
+
+# raise Exception("STOP")
 
 # ==============================================================================
 # GENERATE RANDOM EVALUATIONS OF NUCLEAR DATA USING SANDY
