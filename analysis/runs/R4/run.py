@@ -53,10 +53,14 @@ ACTIVE_BATCH_COUNT = 300
 # FAST_REACTOR = True # True if epithermal, False if thermal
 # EIGHTH = True # True if 1/8 of the core, False if full core
 
-for FAST_REACTOR in [True, False]:
-    for QUARTER in [True, False]:
+# EIGHTH = False
+QUARTER = False
 
-        EIGHTH = False
+for FAST_REACTOR in [True, False]:
+    # for QUARTER in [True, False]:
+    for EIGHTH in [True, False]:
+
+        
         NEUTRON_TEMP = "EPITHERMAL" if FAST_REACTOR else "THERMAL"
         PARTITION_TEXT = "EIGHTH" if EIGHTH else "QUARTER" if QUARTER else "FULL"
         DO_PLOT = False
@@ -349,7 +353,7 @@ for FAST_REACTOR in [True, False]:
 
 
         # @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
-        point = openmc.stats.Point((10, 10, 0))
+        point = openmc.stats.Point((1e-5, 1e-5, 1e-5))
         src = openmc.Source(space=point)
 
         settings = openmc.Settings()
