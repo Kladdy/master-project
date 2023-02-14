@@ -1,57 +1,56 @@
 <?xml version='1.0' encoding='utf-8'?>
 <geometry>
-  <cell id="1" material="2" name="cladding" region="3 -4 1 -2" universe="1" />
-  <cell id="2" material="3" name="moderator" region="-3 1 -2" universe="1" />
-  <cell id="3" material="1" name="fuel" region="4 1 -2" universe="1" />
-  <cell id="4" material="1" name="outer" universe="2" />
-  <cell fill="3" id="5" name="lattice_inner" universe="4" />
-  <cell id="6" material="2" name="containment" region="(7 -8 1 -2) | (-7 ((1 -5) | (-2 6)))" universe="6" />
-  <cell fill="5" id="7" region="-7 5 -6" universe="6" />
-  <lattice id="3">
+  <cell id="22" material="2" name="cladding" region="30 -31 28 -29" universe="19" />
+  <cell id="23" material="3" name="moderator" region="-30 28 -29" universe="19" />
+  <cell id="24" material="1" name="fuel" region="31 28 -29" universe="19" />
+  <cell id="25" material="1" name="outer" universe="20" />
+  <cell fill="21" id="26" name="lattice_inner" universe="22" />
+  <cell fill="23" id="27" region="-34 32 -33" universe="24" />
+  <cell id="28" material="1" name="plenum" region="-34 ((-29 33) | (28 -32))" universe="24" />
+  <lattice id="21">
     <pitch>3 3</pitch>
     <dimension>7 7</dimension>
     <lower_left>-10.5 -10.5</lower_left>
     <universes>
-2 2 2 2 2 2 2 
-2 2 2 2 2 2 2 
-2 2 1 2 1 2 2 
-2 2 2 2 2 2 2 
-2 2 1 2 1 2 2 
-2 2 2 2 2 2 2 
-2 2 2 2 2 2 2 </universes>
+20 20 20 20 20 20 20 
+20 19 19 19 19 19 20 
+20 19 19 19 19 19 20 
+20 19 19 19 19 19 20 
+20 19 19 19 19 19 20 
+20 19 19 19 19 19 20 
+20 20 20 20 20 20 20 </universes>
   </lattice>
-  <lattice id="5">
+  <lattice id="23">
     <pitch>15 15</pitch>
     <dimension>20 20</dimension>
     <lower_left>-150.0 -150.0</lower_left>
     <universes>
-2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-2 2 2 2 2 2 4 4 4 4 4 4 4 4 2 2 2 2 2 2 
-2 2 2 2 2 4 4 4 4 4 4 4 4 4 4 2 2 2 2 2 
-2 2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 2 2 
-2 2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 2 2 
-2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 2 
-2 2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 2 2 
-2 2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 2 2 
-2 2 2 2 2 4 4 4 4 4 4 4 4 4 4 2 2 2 2 2 
-2 2 2 2 2 2 4 4 4 4 4 4 4 4 2 2 2 2 2 2 
-2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 </universes>
+20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+20 20 20 20 20 20 22 22 22 22 22 22 22 22 20 20 20 20 20 20 
+20 20 20 20 20 22 22 22 22 22 22 22 22 22 22 20 20 20 20 20 
+20 20 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 20 
+20 20 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 20 
+20 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 
+20 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 
+20 20 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 20 
+20 20 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 20 
+20 20 20 20 20 22 22 22 22 22 22 22 22 22 22 20 20 20 20 20 
+20 20 20 20 20 20 22 22 22 22 22 22 22 22 20 20 20 20 20 20 
+20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 </universes>
   </lattice>
-  <surface boundary="vacuum" coeffs="-150.0" id="1" type="z-plane" />
-  <surface boundary="vacuum" coeffs="150.0" id="2" type="z-plane" />
-  <surface coeffs="0.0 0.0 1.15" id="3" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 1.25" id="4" type="z-cylinder" />
-  <surface boundary="vacuum" coeffs="-125.0" id="5" type="z-plane" />
-  <surface boundary="vacuum" coeffs="125.0" id="6" type="z-plane" />
-  <surface coeffs="0.0 0.0 150" id="7" type="z-cylinder" />
-  <surface boundary="vacuum" coeffs="0.0 0.0 175" id="8" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="-150.0" id="28" type="z-plane" />
+  <surface boundary="vacuum" coeffs="150.0" id="29" type="z-plane" />
+  <surface coeffs="0.0 0.0 1.15" id="30" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 1.25" id="31" type="z-cylinder" />
+  <surface coeffs="-140.0" id="32" type="z-plane" />
+  <surface coeffs="140.0" id="33" type="z-plane" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 150" id="34" type="z-cylinder" />
 </geometry>

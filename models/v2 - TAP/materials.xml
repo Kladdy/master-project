@@ -8,7 +8,7 @@
     <nuclide name="Li6" wo="2.418e-06" />
     <nuclide name="F19" wo="0.32964" />
   </material>
-  <material id="2" name="ZrH" temperature="900">
+  <material id="2" name="ZrH" temperature="600">
     <density units="g/cm3" value="5.66" />
     <nuclide name="Zr90" wo="0.49793" />
     <nuclide name="Zr91" wo="0.1098" />
