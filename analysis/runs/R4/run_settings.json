@@ -1,0 +1,11 @@
+{
+    "FAST_REACTOR": false,
+    "PARTITION_TEXT": "FULL",
+    "particle_count": 30000,
+    "active_batch_count": 300,
+    "inactive_batch_count": 50,
+    "t_start": 1676379872.544,
+    "t_end": 1676380002.52,
+    "t_elapsed": 129.975,
+    "seed": 2959531263
+}

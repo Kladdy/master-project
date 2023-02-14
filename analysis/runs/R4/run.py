@@ -54,11 +54,14 @@ ACTIVE_BATCH_COUNT = 300
 # EIGHTH = True # True if 1/8 of the core, False if full core
 
 for FAST_REACTOR in [True, False]:
-    for EIGHTH in [True, False]:
+    for QUARTER in [True, False]:
 
+        EIGHTH = False
         NEUTRON_TEMP = "EPITHERMAL" if FAST_REACTOR else "THERMAL"
-        EIGHTH_TEXT = "EIGHTH" if EIGHTH else "FULL"
+        PARTITION_TEXT = "EIGHTH" if EIGHTH else "QUARTER" if QUARTER else "FULL"
         DO_PLOT = False
+
+        if (EIGHTH and QUARTER): raise ValueError("EIGHTH and QUARTER cannot both be True")
 
         # @@@@@@@@@@@@@@@@@@@@@@ Materials @@@@@@@@@@@@@@@@@@@@@@
         # Fuel
@@ -256,6 +259,11 @@ for FAST_REACTOR in [True, False]:
             plane_z = openmc.ZPlane(z0=0, boundary_type='reflective')
             region_main = region_main & +plane_x & +plane_y & +plane_z
             region_plenum = region_plenum & +plane_x & +plane_y & +plane_z
+        if QUARTER:
+            plane_x = openmc.XPlane(x0=0, boundary_type='reflective')
+            plane_y = openmc.YPlane(y0=0, boundary_type='reflective')
+            region_main = region_main & +plane_x & +plane_y
+            region_plenum = region_plenum & +plane_x & +plane_y
 
         # cell_containment = openmc.Cell(name="containment", fill=material_cladding, region=region_containment)
         cell_main = openmc.Cell(fill=lattice_outer, region=region_main)
@@ -280,12 +288,13 @@ for FAST_REACTOR in [True, False]:
                 material_moderator: PLOT_MODERATOR_COLOR
             }
 
+            slize_coord_XY = 0
             if EIGHTH:
                 slize_coord_XY = 1
 
             plotXY = openmc.Plot.from_geometry(geometry, basis='xy', slice_coord=slize_coord_XY)
             plotXY.color_by = PLOT_COLOR_BY
-            plotXY.filename = f'plotXY-{NEUTRON_TEMP}-{EIGHTH_TEXT}'
+            plotXY.filename = f'plotXY-{NEUTRON_TEMP}-{PARTITION_TEXT}'
             plotXY.pixels = PLOT_PIXELS
             plotXY.colors = colors
             plotXY.to_ipython_image()
@@ -293,7 +302,7 @@ for FAST_REACTOR in [True, False]:
             # Add slice_coord to actually see the moderator rods in the plot
             plotXZ = openmc.Plot.from_geometry(geometry, basis='xz', slice_coord=4)
             plotXZ.color_by = PLOT_COLOR_BY
-            plotXZ.filename = f'plotXZ-{NEUTRON_TEMP}-{EIGHTH_TEXT}'
+            plotXZ.filename = f'plotXZ-{NEUTRON_TEMP}-{PARTITION_TEXT}'
             plotXZ.pixels = PLOT_PIXELS
             plotXZ.colors = colors
             plotXZ.to_ipython_image()
@@ -340,7 +349,7 @@ for FAST_REACTOR in [True, False]:
 
 
         # @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
-        point = openmc.stats.Point((0, 0, 0))
+        point = openmc.stats.Point((10, 10, 0))
         src = openmc.Source(space=point)
 
         settings = openmc.Settings()
@@ -366,7 +375,7 @@ for FAST_REACTOR in [True, False]:
         # @@@@@@@@@@@@@@@@@@@@@@ Save data @@@@@@@@@@@@@@@@@@@@@@
         run_settings = {
             "FAST_REACTOR": FAST_REACTOR,
-            "EIGHTH": EIGHTH,
+            "PARTITION_TEXT": PARTITION_TEXT,
             "particle_count": PARTICLE_COUNT,
             "active_batch_count": ACTIVE_BATCH_COUNT,
             "inactive_batch_count": INACTIVE_BATCHES,
