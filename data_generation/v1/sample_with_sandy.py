@@ -18,7 +18,7 @@ import re
 import shutil
 from pathlib import Path
 
-import openmc.data
+import openmc
 
 
 description = """
@@ -99,13 +99,13 @@ for nuc in nuclides:
         sys.exit()
     atomic_num = atomic_dict[atomic_sym]
 
-    file_mass = f"{mass_num:03}"
-    file_atomic = f"{atomic_num:03}"
+    file_mass = f"{mass_num}"
+    file_atomic = f"{atomic_num}"
 
-    file_name = f"{prefix}{file_atomic}_{atomic_sym}_{file_mass}{suffix}"
+    file_name = f"{prefix}{file_atomic}-{atomic_sym}-{file_mass}g{suffix}"
 
-    if not (libdir / "neutron" / file_name).is_file():
-        print(f"File {libdir / 'neutron' / file_name} does not exist")
+    if not (libdir / file_name).is_file():
+        print(f"File {libdir / file_name} does not exist")
         sys.exit()
     nuc_dict[nuc] = {
         "sym": atomic_sym,
@@ -129,7 +129,7 @@ if not format_only:
         nuc_dir_endf.mkdir(exist_ok=True)
 
         shutil.copyfile(
-            libdir / "neutron" / nuc_dict[nuc]["file_name"],
+            libdir / nuc_dict[nuc]["file_name"],
             nuc_dir_endf / nuc_dict[nuc]["file_name"],
         )
         os.chdir(nuc_dir_endf)
