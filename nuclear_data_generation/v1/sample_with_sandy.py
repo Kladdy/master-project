@@ -5,8 +5,11 @@
 # - Based on sample_sandy from the OpenMC data repository
 
 # Run as 
-# python sample_with_sandy.py --samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/JEFF33-n-endf6/sandy_rand
-# python sample_with_sandy.py --samples 10 -n F19 -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_rand
+# python sample_with_sandy.py --samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/JEFF33-n-endf6/sandy_samples_v1
+# python sample_with_sandy.py -p 32 --samples 10 -n F19  -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_samples_v1
+
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 import argparse
 import glob
