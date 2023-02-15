@@ -8,7 +8,7 @@ import numpy as np
 # import matplotlib.pyplot as plt
 import os
 import sys
-TOOLS_PATH = f"{os.getenv('MASTER_PROJECT_ROOT_FOLDER') or '/home/fne23_stjarnholm/master-project'}/logistics"
+TOOLS_PATH = f"{os.getenv('MASTER_PROJECT_ROOT_FOLDER')}/logistics"
 sys.path.insert(0, TOOLS_PATH)
 from tools import run_tools
 import time
