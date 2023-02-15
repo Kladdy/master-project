@@ -379,6 +379,7 @@ for FAST_REACTOR in [True, False]:
         # @@@@@@@@@@@@@@@@@@@@@@ Save data @@@@@@@@@@@@@@@@@@@@@@
         run_settings = {
             "FAST_REACTOR": FAST_REACTOR,
+            "NEUTRON_TEMP": NEUTRON_TEMP,
             "PARTITION_TEXT": PARTITION_TEXT,
             "particle_count": PARTICLE_COUNT,
             "active_batch_count": ACTIVE_BATCH_COUNT,
