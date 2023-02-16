@@ -6,7 +6,7 @@
 
 # Run as 
 # python sample_with_sandy.py --samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/JEFF33-n-endf6/sandy_samples_v1
-# python sample_with_sandy.py -p 32 --samples 10 -n F19  -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_samples_v1
+# python sample_with_sandy.py -p 32 --samples 1000 -n F19  -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_samples_v1
 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -30,6 +30,7 @@ its covariance matrix using SANDY, and converts them to HDF5 for use in OpenMC. 
 generates a cross_sections_sandy.xml file with the standard library plus the sampled evaluations.
 """
 
+TEMPERATURES = [900.0]
 
 class CustomFormatter(
     argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter
@@ -63,6 +64,11 @@ if output_dir == None:
     output_dir = script_dir / "sandy_rand"
 else:
     output_dir = Path(output_dir).resolve()
+
+# Remove old files
+if output_dir.is_dir():
+    shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
 
 endf_files_dir = output_dir / "endf"
 hdf5_files_dir = output_dir / "hdf5"
@@ -152,15 +158,16 @@ def process_neutron_random(nuc, i, out_dir, in_dir, file_num):  # Need to add te
     fileIn = in_dir / f"{nuc}-{i}"
     fileOut = out_dir / f"{nuc}-{i}.h5"
 
-    data = openmc.data.IncidentNeutron.from_njoy(fileIn)
-    data.name = f"{nuc}-{i}"
+    data = openmc.data.IncidentNeutron.from_njoy(fileIn, temperatures=TEMPERATURES)
+    # data.name = f"{nuc}-{i}"
+    data.name = f"{nuc}" # As we want the name in the .h5 file to not have the index
     data.export_to_hdf5(fileOut, "w")
     if i % 40 == 0:
         print(f"Nuclide {nuc} {i+1}/{file_num} finished")
 
 
 print("Beginning NJOY processing")
-with Pool() as pool:
+with Pool(int(args.processes)) as pool:
     results = []
     file_num = int(args.samples)
     for nuc in nuclides:

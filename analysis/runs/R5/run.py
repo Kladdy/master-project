@@ -53,7 +53,7 @@ ACTIVE_BATCH_COUNT = 300
 EIGHTH = False
 QUARTER = False
 
-for FAST_REACTOR in [True, False]:
+for FAST_REACTOR in [False, True]:
 
     NEUTRON_TEMP = "EPITHERMAL" if FAST_REACTOR else "THERMAL"
     PARTITION_TEXT = "EIGHTH" if EIGHTH else "QUARTER" if QUARTER else "FULL"
@@ -346,54 +346,65 @@ for FAST_REACTOR in [True, False]:
 
 
     N_ITERATIONS = 1000
-    for i in range(N_ITERATIONS):
-        new_h5_base_path = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v1/hdf5/F19"
-        new_h5_path = f"{new_h5_base_path}/F19-{i}.h5"
-        nuclear_data_tools.get_new_F19_h5(new_h5_path)
+    for USE_SAMPLED_DATA in [True, False]:
+        for i in range(N_ITERATIONS):
+
+            # @@@@@@@@@@@@@@@@@@@@@@ Perturbations @@@@@@@@@@@@@@@@@@@@@@
+            if USE_SAMPLED_DATA:
+                new_h5_base_path = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v1/hdf5/F19"
+                new_h5_path = f"{new_h5_base_path}/F19-{i+1}.h5"
+                if not os.path.exists(new_h5_path):
+                    raise Exception(f"File {new_h5_path} does not exist")
+                nuclear_data_tools.get_sampled_F19_h5(new_h5_path)
+            else:
+                nuclear_data_tools.restore_F19_h5()
+            time.sleep(1) # Wait for file to be written (probably not needed...)
+            # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-        # @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
-        if EIGHTH:
-            point = openmc.stats.Point((1e-5, 1e-5, 1e-5))
-        elif QUARTER:
-            point = openmc.stats.Point((1e-5, 1e-5, 0))
-        else:
-            point = openmc.stats.Point((0, 0, 0))
-        src = openmc.Source(space=point)
+            # @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
+            if EIGHTH:
+                point = openmc.stats.Point((1e-5, 1e-5, 1e-5))
+            elif QUARTER:
+                point = openmc.stats.Point((1e-5, 1e-5, 0))
+            else:
+                point = openmc.stats.Point((0, 0, 0))
+            src = openmc.Source(space=point)
 
-        settings = openmc.Settings()
-        # settings.seed = random.randint(1, 1e10)
-        settings.source = src
-        settings.batches = ACTIVE_BATCH_COUNT + INACTIVE_BATCHES
-        settings.inactive = INACTIVE_BATCHES
-        settings.particles = PARTICLE_COUNT
-        settings.export_to_xml()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-
-        # @@@@@@@@@@@@@@@@@@@@@@ Run OpenMC @@@@@@@@@@@@@@@@@@@@@@
-        os.system('rm s*h5') # Remove old files
-        t_start = time.time()
-        openmc.run()
-        t_end = time.time()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            settings = openmc.Settings()
+            settings.seed = random.randint(1, 1e10)
+            settings.source = src
+            settings.batches = ACTIVE_BATCH_COUNT + INACTIVE_BATCHES
+            settings.inactive = INACTIVE_BATCHES
+            settings.particles = PARTICLE_COUNT
+            settings.export_to_xml()
+            # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 
-        # @@@@@@@@@@@@@@@@@@@@@@ Save data @@@@@@@@@@@@@@@@@@@@@@
-        run_settings = {
-            "fast_reactor": FAST_REACTOR,
-            "neutron_temp": NEUTRON_TEMP,
-            "partition_text": PARTITION_TEXT,
-            "particle_count": PARTICLE_COUNT,
-            "active_batch_count": ACTIVE_BATCH_COUNT,
-            "inactive_batch_count": INACTIVE_BATCHES,
-            "t_start": round(t_start, 3),
-            "t_end": round(t_end, 3),
-            "t_elapsed": round(t_end - t_start, 3),
-            "seed": settings.seed
-        }
-        run_tools.dump_run_settings_json(run_settings)
-        run_tools.save_run_data()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            # @@@@@@@@@@@@@@@@@@@@@@ Run OpenMC @@@@@@@@@@@@@@@@@@@@@@
+            os.system('rm s*h5') # Remove old files
+            t_start = time.time()
+            openmc.run()
+            t_end = time.time()
+            # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+            # @@@@@@@@@@@@@@@@@@@@@@ Save data @@@@@@@@@@@@@@@@@@@@@@
+            run_settings = {
+                "fast_reactor": FAST_REACTOR,
+                "neutron_temp": NEUTRON_TEMP,
+                "use_sampled_data": USE_SAMPLED_DATA,
+                "partition_text": PARTITION_TEXT,
+                "particle_count": PARTICLE_COUNT,
+                "active_batch_count": ACTIVE_BATCH_COUNT,
+                "inactive_batch_count": INACTIVE_BATCHES,
+                "t_start": round(t_start, 3),
+                "t_end": round(t_end, 3),
+                "t_elapsed": round(t_end - t_start, 3),
+                "seed": settings.seed
+            }
+            run_tools.dump_run_settings_json(run_settings)
+            run_tools.save_run_data()
+            # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
