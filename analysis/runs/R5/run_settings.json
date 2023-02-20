@@ -1,13 +1,13 @@
 {
     "fast_reactor": false,
     "neutron_temp": "THERMAL",
-    "use_sampled_data": true,
+    "use_sampled_data": false,
     "partition_text": "FULL",
     "particle_count": 30000,
     "active_batch_count": 300,
     "inactive_batch_count": 50,
-    "t_start": 1676562554.957,
-    "t_end": 1676562699.613,
-    "t_elapsed": 144.656,
-    "seed": 7113786500
+    "t_start": 1676896997.153,
+    "t_end": 1676897150.369,
+    "t_elapsed": 153.216,
+    "seed": 823910787
 }
