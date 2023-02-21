@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 # Sample data with SANDY
-# - v1
-# - Date: 9 feb 2023
-# - Based on sample_sandy from the OpenMC data repository
+# - v2
+# - Date: 21 feb 2023
+# - Based on sample_sandy from the OpenMC data repository, but now adding PENDF file to sandy as it will be needed for uncertainy propagation of cross sections and their resonance parameters
 
 # Run as 
 # python sample_with_sandy.py --samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/JEFF33-n-endf6/sandy_samples_v1
