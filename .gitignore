@@ -6,3 +6,5 @@ RUNDATA_*
 *.h5
 *.xml
 *.out
+
+/nuclear_data_generation/v2/tape*
