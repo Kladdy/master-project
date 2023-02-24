@@ -65,4 +65,7 @@ def plot_histogram_from_df(df: pd.DataFrame, data_key: str, linewidth: float = 0
     if filename:
         plt.savefig(filename)
 
+    if fit_gaussian:
+        return plt.gcf(), popt, pcov
+
     return plt.gcf()
