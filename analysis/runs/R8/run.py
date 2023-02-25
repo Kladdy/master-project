@@ -1,6 +1,6 @@
-# - Date: 24/02/2023
+# - Date: 25/02/2023
 # - Based on: Model v2
-# - Description: Test of sampled F-19 data (sampling v2) for TMC, fast TMC, and fast GRS
+# - Description: Test of Shannon Entropy convergence (https://docs.openmc.org/en/stable/usersguide/settings.html#shannon-entropy)
 
 import openmc
 import numpy as np
@@ -298,66 +298,80 @@ tallies = openmc.Tallies([tally1, tally2])
 tallies.export_to_xml()
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+USE_SAMPLED_DATA = True
 
-N_ITERATIONS = 500
-for USE_SAMPLED_DATA in [True, False]:
-    for i in range(N_ITERATIONS):
+# N_ITERATIONS = 500
+# for USE_SAMPLED_DATA in [True, False]:
+#     for i in range(N_ITERATIONS):
 
-        # @@@@@@@@@@@@@@@@@@@@@@ Perturbations @@@@@@@@@@@@@@@@@@@@@@
-        if USE_SAMPLED_DATA:
-            new_h5_base_path = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v2"
-            new_h5_path = f"{new_h5_base_path}/F19-{i+1}.h5"
-            if not os.path.exists(new_h5_path):
-                raise Exception(f"File {new_h5_path} does not exist")
-            nuclear_data_tools.get_sampled_F19_h5(new_h5_path)
-        else:
-            nuclear_data_tools.restore_F19_h5()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-        # @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
-        if EIGHTH:
-            point = openmc.stats.Point((1e-5, 1e-5, 1e-5))
-        elif QUARTER:
-            point = openmc.stats.Point((1e-5, 1e-5, 0))
-        else:
-            point = openmc.stats.Point((0, 0, 0))
-        src = openmc.Source(space=point)
-
-        settings = openmc.Settings()
-        settings.seed = random.randint(1, 1e10)
-        settings.source = src
-        settings.batches = ACTIVE_BATCH_COUNT + INACTIVE_BATCHES
-        settings.inactive = INACTIVE_BATCHES
-        settings.particles = PARTICLE_COUNT
-        settings.export_to_xml()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@ Perturbations @@@@@@@@@@@@@@@@@@@@@@
+# if USE_SAMPLED_DATA:
+#     new_h5_base_path = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v2"
+#     new_h5_path = f"{new_h5_base_path}/F19-{i+1}.h5"
+#     if not os.path.exists(new_h5_path):
+#         raise Exception(f"File {new_h5_path} does not exist")
+#     nuclear_data_tools.get_sampled_F19_h5(new_h5_path)
+# else:
+#     nuclear_data_tools.restore_F19_h5()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
+# @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
+if EIGHTH:
+    point = openmc.stats.Point((1e-5, 1e-5, 1e-5))
+elif QUARTER:
+    point = openmc.stats.Point((1e-5, 1e-5, 0))
+else:
+    point = openmc.stats.Point((0, 0, 0))
+src = openmc.Source(space=point)
 
-        # @@@@@@@@@@@@@@@@@@@@@@ Run OpenMC @@@@@@@@@@@@@@@@@@@@@@
-        os.system('rm s*h5') # Remove old files
-        t_start = time.time()
-        openmc.run()
-        t_end = time.time()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# Shannon Entropy
+regular_mesh = openmc.RegularMesh()
+regular_mesh.lower_left, regular_mesh.upper_right = geometry.bounding_box
+regular_mesh.dimension = [10, 10, 10]
+
+print("Bounding box: @@@@@@@@@@@")
+print(geometry.bounding_box)
+print(regular_mesh.lower_left)
+print(regular_mesh.upper_right)
+
+raise Exception("STOP")
+
+settings = openmc.Settings()
+settings.seed = random.randint(1, 1e10)
+settings.source = src
+settings.entropy_mesh = regular_mesh
+settings.batches = ACTIVE_BATCH_COUNT + INACTIVE_BATCHES
+settings.inactive = INACTIVE_BATCHES
+settings.particles = PARTICLE_COUNT
+settings.export_to_xml()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 
-        # @@@@@@@@@@@@@@@@@@@@@@ Save data @@@@@@@@@@@@@@@@@@@@@@
-        run_settings = {
-            "fast_reactor": FAST_REACTOR,
-            "neutron_temp": NEUTRON_TEMP,
-            "use_sampled_data": USE_SAMPLED_DATA,
-            "partition_text": PARTITION_TEXT,
-            "particle_count": PARTICLE_COUNT,
-            "active_batch_count": ACTIVE_BATCH_COUNT,
-            "inactive_batch_count": INACTIVE_BATCHES,
-            "t_start": round(t_start, 3),
-            "t_end": round(t_end, 3),
-            "t_elapsed": round(t_end - t_start, 3),
-            "seed": settings.seed
-        }
-        run_tools.dump_run_settings_json(run_settings)
-        run_tools.save_run_data()
-        # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@ Run OpenMC @@@@@@@@@@@@@@@@@@@@@@
+os.system('rm s*h5') # Remove old files
+t_start = time.time()
+openmc.run()
+t_end = time.time()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+# @@@@@@@@@@@@@@@@@@@@@@ Save data @@@@@@@@@@@@@@@@@@@@@@
+run_settings = {
+    "fast_reactor": FAST_REACTOR,
+    "neutron_temp": NEUTRON_TEMP,
+    "use_sampled_data": USE_SAMPLED_DATA,
+    "partition_text": PARTITION_TEXT,
+    "particle_count": PARTICLE_COUNT,
+    "active_batch_count": ACTIVE_BATCH_COUNT,
+    "inactive_batch_count": INACTIVE_BATCHES,
+    "t_start": round(t_start, 3),
+    "t_end": round(t_end, 3),
+    "t_elapsed": round(t_end - t_start, 3),
+    "seed": settings.seed
+}
+run_tools.dump_run_settings_json(run_settings)
+run_tools.save_run_data()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

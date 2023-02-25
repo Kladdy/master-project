@@ -6,8 +6,8 @@
     "particle_count": 30000,
     "active_batch_count": 300,
     "inactive_batch_count": 50,
-    "t_start": 1677327389.166,
-    "t_end": 1677327580.564,
-    "t_elapsed": 191.398,
-    "seed": 2769516497
+    "t_start": 1677313300.882,
+    "t_end": 1677313529.356,
+    "t_elapsed": 228.474,
+    "seed": 7591102698
 }
