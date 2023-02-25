@@ -4,10 +4,10 @@
     "use_sampled_data": true,
     "partition_text": "FULL",
     "particle_count": 30000,
-    "active_batch_count": 300,
+    "active_batch_count": 50,
     "inactive_batch_count": 50,
-    "t_start": 1677313300.882,
-    "t_end": 1677313529.356,
-    "t_elapsed": 228.474,
-    "seed": 7591102698
+    "t_start": 1677327938.784,
+    "t_end": 1677328000.468,
+    "t_elapsed": 61.684,
+    "seed": 5605611646
 }

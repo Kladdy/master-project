@@ -330,13 +330,6 @@ regular_mesh = openmc.RegularMesh()
 regular_mesh.lower_left, regular_mesh.upper_right = geometry.bounding_box
 regular_mesh.dimension = [10, 10, 10]
 
-print("Bounding box: @@@@@@@@@@@")
-print(geometry.bounding_box)
-print(regular_mesh.lower_left)
-print(regular_mesh.upper_right)
-
-raise Exception("STOP")
-
 settings = openmc.Settings()
 settings.seed = random.randint(1, 1e10)
 settings.source = src
