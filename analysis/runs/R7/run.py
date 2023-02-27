@@ -49,7 +49,7 @@ CORE_HEIGHT = 300 # cm
 INACTIVE_BATCHES = 50
 PARTICLE_COUNT = 30000
 ACTIVE_BATCH_COUNT = 300
-FAST_REACTOR = False # True if epithermal, False if thermal
+FAST_REACTOR = True # True if epithermal, False if thermal
 EIGHTH = False
 QUARTER = False
 
