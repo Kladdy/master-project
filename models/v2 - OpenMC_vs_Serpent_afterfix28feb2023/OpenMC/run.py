@@ -40,7 +40,7 @@ CORE_HEIGHT = 350 # cm
 INACTIVE_BATCHES = 50
 PARTICLE_COUNT = 30000
 ACTIVE_BATCH_COUNT = 300
-FAST_REACTOR = False # True if epithermal, False if thermal
+FAST_REACTOR = True # True if epithermal, False if thermal
 # EIGHTH = False
 # QUARTER = False
 
@@ -291,8 +291,16 @@ tally2.filters = [cell_filter2,energy_filter]
 tally2.scores = ['flux']
 # END Tally 2
 
+# Tally 3: energy spectrum everywhere
+cell_filter3 = openmc.CellFilter(cell_main)
+
+tally3 = openmc.Tally(3)
+tally3.filters = [cell_filter3,energy_filter]
+tally3.scores = ['flux']
+# END Tally 3
+
 # Export
-tallies = openmc.Tallies([tally1, tally2])
+tallies = openmc.Tallies([tally1, tally2, tally3])
 tallies.export_to_xml()
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

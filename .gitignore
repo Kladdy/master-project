@@ -163,9 +163,10 @@ cython_debug/
 
 RUNDATA_*
 
-# Ignore .h5, .xml and .out
+# Ignore .h5, .xml, .out and .json
 *.h5
 *.xml
 *.out
+*.json
 
 /nuclear_data_generation/v2/tape*
