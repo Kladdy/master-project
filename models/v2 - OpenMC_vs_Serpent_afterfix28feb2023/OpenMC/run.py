@@ -3,6 +3,8 @@ import openmc
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import time
+import random
 
 # Fuel properties
 FUEL_TEMP = 900 # K
@@ -38,7 +40,7 @@ CORE_HEIGHT = 350 # cm
 INACTIVE_BATCHES = 50
 PARTICLE_COUNT = 30000
 ACTIVE_BATCH_COUNT = 300
-FAST_REACTOR = True # True if epithermal, False if thermal
+FAST_REACTOR = False # True if epithermal, False if thermal
 # EIGHTH = False
 # QUARTER = False
 
@@ -266,3 +268,59 @@ if DO_PLOT:
     # vox_plot.pixels = (400, 400, 200)
     # vox_plot.to_ipython_image()
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+# @@@@@@@@@@@@@@@@@@@@@@ Tallies @@@@@@@@@@@@@@@@@@@@@@
+
+# Tally 1: energy spectrum in fuel
+cell_filter1 = openmc.CellFilter(cell_fuel)
+energybins = np.logspace(-2, 7, 1001) #1000 bins between 1e-2 eV and 1e7 eV
+energy_filter = openmc.EnergyFilter(energybins)
+
+tally1 = openmc.Tally(1)
+tally1.filters = [cell_filter1,energy_filter]
+tally1.scores = ['flux','fission']
+# END Tally 1
+
+# Tally 2: energy spectrum in moderator
+cell_filter2 = openmc.CellFilter(cell_moderator)
+
+tally2 = openmc.Tally(2)
+tally2.filters = [cell_filter2,energy_filter]
+tally2.scores = ['flux']
+# END Tally 2
+
+# Export
+tallies = openmc.Tallies([tally1, tally2])
+tallies.export_to_xml()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+# @@@@@@@@@@@@@@@@@@@@@@ Settings @@@@@@@@@@@@@@@@@@@@@@
+if EIGHTH:
+    point = openmc.stats.Point((1e-5, 1e-5, 1e-5))
+elif QUARTER:
+    point = openmc.stats.Point((1e-5, 1e-5, 0))
+else:
+    point = openmc.stats.Point((0, 0, 0))
+src = openmc.Source(space=point)
+
+settings = openmc.Settings()
+settings.seed = random.randint(1, 1e10)
+settings.source = src
+settings.batches = ACTIVE_BATCH_COUNT + INACTIVE_BATCHES
+settings.inactive = INACTIVE_BATCHES
+settings.particles = PARTICLE_COUNT
+settings.export_to_xml()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+# @@@@@@@@@@@@@@@@@@@@@@ Run OpenMC @@@@@@@@@@@@@@@@@@@@@@
+os.system('rm s*h5') # Remove old files
+t_start = time.time()
+openmc.run()
+t_end = time.time()
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
