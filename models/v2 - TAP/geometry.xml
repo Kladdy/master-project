@@ -1,56 +1,56 @@
 <?xml version='1.0' encoding='utf-8'?>
 <geometry>
-  <cell id="36" material="2" name="cladding" region="38 -39 36 -37" universe="31" />
-  <cell id="37" material="3" name="moderator" region="-38 36 -37" universe="31" />
-  <cell id="38" material="1" name="fuel" region="39 36 -37" universe="31" />
-  <cell id="39" material="1" name="outer" universe="32" />
-  <cell fill="33" id="40" name="lattice_inner" universe="34" />
-  <cell fill="35" id="41" region="-42 40 -41" universe="36" />
-  <cell id="42" material="1" name="plenum" region="-42 ((-37 41) | (36 -40))" universe="36" />
-  <lattice id="33">
+  <cell id="8" material="3" name="cladding" region="10 -11 8 -9" universe="7" />
+  <cell id="9" material="2" name="moderator" region="-10 8 -9" universe="7" />
+  <cell id="10" material="1" name="fuel" region="11 8 -9" universe="7" />
+  <cell id="11" material="1" name="outer" universe="8" />
+  <cell fill="9" id="12" name="lattice_inner" universe="10" />
+  <cell fill="11" id="13" region="-14 12 -13" universe="12" />
+  <cell id="14" material="1" name="plenum" region="-14 ((-9 13) | (8 -12))" universe="12" />
+  <lattice id="9">
     <pitch>3 3</pitch>
     <dimension>7 7</dimension>
     <lower_left>-10.5 -10.5</lower_left>
     <universes>
-32 32 32 32 32 32 32 
-32 31 31 31 31 31 32 
-32 31 31 31 31 31 32 
-32 31 31 31 31 31 32 
-32 31 31 31 31 31 32 
-32 31 31 31 31 31 32 
-32 32 32 32 32 32 32 </universes>
+8 8 8 8 8 8 8 
+8 7 7 7 7 7 8 
+8 7 7 7 7 7 8 
+8 7 7 7 7 7 8 
+8 7 7 7 7 7 8 
+8 7 7 7 7 7 8 
+8 8 8 8 8 8 8 </universes>
   </lattice>
-  <lattice id="35">
+  <lattice id="11">
     <pitch>15 15</pitch>
     <dimension>20 20</dimension>
     <lower_left>-150.0 -150.0</lower_left>
     <universes>
-32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 
-32 32 32 32 32 32 34 34 34 34 34 34 34 34 32 32 32 32 32 32 
-32 32 32 32 32 34 34 34 34 34 34 34 34 34 34 32 32 32 32 32 
-32 32 32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 32 32 
-32 32 32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 32 32 
-32 32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 
-32 32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 32 
-32 32 32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 32 32 
-32 32 32 34 34 34 34 34 34 34 34 34 34 34 34 34 34 32 32 32 
-32 32 32 32 32 34 34 34 34 34 34 34 34 34 34 32 32 32 32 32 
-32 32 32 32 32 32 34 34 34 34 34 34 34 34 32 32 32 32 32 32 
-32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 </universes>
+8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
+8 8 8 8 8 8 10 10 10 10 10 10 10 10 8 8 8 8 8 8 
+8 8 8 8 8 10 10 10 10 10 10 10 10 10 10 8 8 8 8 8 
+8 8 8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 8 8 
+8 8 8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 8 8 
+8 8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 
+8 8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 8 
+8 8 8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 8 8 
+8 8 8 10 10 10 10 10 10 10 10 10 10 10 10 10 10 8 8 8 
+8 8 8 8 8 10 10 10 10 10 10 10 10 10 10 8 8 8 8 8 
+8 8 8 8 8 8 10 10 10 10 10 10 10 10 8 8 8 8 8 8 
+8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 </universes>
   </lattice>
-  <surface boundary="vacuum" coeffs="-150.0" id="36" type="z-plane" />
-  <surface boundary="vacuum" coeffs="150.0" id="37" type="z-plane" />
-  <surface coeffs="0.0 0.0 1.15" id="38" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 1.25" id="39" type="z-cylinder" />
-  <surface coeffs="-140.0" id="40" type="z-plane" />
-  <surface coeffs="140.0" id="41" type="z-plane" />
-  <surface boundary="vacuum" coeffs="0.0 0.0 150" id="42" type="z-cylinder" />
+  <surface boundary="vacuum" coeffs="-150.0" id="8" type="z-plane" />
+  <surface boundary="vacuum" coeffs="150.0" id="9" type="z-plane" />
+  <surface coeffs="0.0 0.0 1.15" id="10" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 1.25" id="11" type="z-cylinder" />
+  <surface coeffs="-140.0" id="12" type="z-plane" />
+  <surface coeffs="140.0" id="13" type="z-plane" />
+  <surface boundary="vacuum" coeffs="0.0 0.0 150" id="14" type="z-cylinder" />
 </geometry>

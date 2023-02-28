@@ -5,7 +5,7 @@
     <width>300.0 300.0</width>
     <pixels>1000 1000</pixels>
     <color id="1" rgb="154 205 50" />
-    <color id="2" rgb="119 136 153" />
-    <color id="3" rgb="25 25 112" />
+    <color id="2" rgb="25 25 112" />
+    <color id="3" rgb="119 136 153" />
   </plot>
 </plots>
