@@ -170,3 +170,4 @@ RUNDATA_*
 *.json
 
 /nuclear_data_generation/v2/tape*
+/nuclear_data_generation/v3/tape*
