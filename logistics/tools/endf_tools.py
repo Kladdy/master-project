@@ -90,3 +90,8 @@ def MT_to_label(MT: int, short: bool):
 # for MT_key in MT_dict.keys():
 #     print(f"python data_sampler_v3.py --MT {MT_key}", end="; ")
 # print("\n")
+
+# print("")
+# for MT_key in MT_dict.keys():
+#     print(f"python run.py --MT {MT_key}")
+# print("\n")
