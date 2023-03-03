@@ -26,18 +26,38 @@ import sys
 from pathlib import Path
 import openmc
 import re
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--MT", help = "MT value (2, 51, 102, etc.) to perturb. Use None for all MTs", type=int, default=None)
+parser.add_argument("-f", "--force", help = "Force overwrite of existing files", action="store_true")
+args = parser.parse_args()
 
 # Parameters
 TEMPERATURES = [900.0] # K, make sure input1 and input2 have the correct temperatures
 NUCLEIDE = "F19" # MAT = 925 for F19, make sure input1 and input2 have the correct MAT
 SAMPLES = 1000 # number of samples to generate
-PROCESSES = 20 # number of worker processes
-MT = None # MT number to sample, None if all MTs should be sampled (2=elastic scattering, 102=neutron capture)
+PROCESSES = 60 # number of worker processes
+MT = args.MT # MT number to sample, None if all MTs should be sampled (2=elastic scattering, 102=neutron capture)
 endf_dir = "/home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6"
 output_dir = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v3"
 
 if MT is not None:
     output_dir = f"{output_dir}-MT{MT}"
+
+# Check if output directory exists, and if it does, ask if it should be overwritten (unless --force is used)
+if os.path.isdir(output_dir):
+    amount_of_files_in_output_dir = len(os.listdir(output_dir))
+    if args.force:
+        print(f"Output directory {output_dir} already exists (with {amount_of_files_in_output_dir} files), but will be overwritten")
+    else:
+        print(f"Output directory {output_dir} already exists (with {amount_of_files_in_output_dir} files), do you want to overwrite it? (y/n)")
+        answer = input()
+        if answer == "y":
+            print(f"Output directory {output_dir} will be overwritten")
+        else:
+            print("Exiting")
+            sys.exit()
 
 # Create output directory. If it already exists, delete it and create a new one.
 if os.path.isdir(output_dir):
@@ -46,8 +66,6 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Remove all tapes from the current directory
 os.system("rm ./tape*")
-
-
 
 # Preparation: Copy the endf file to the current directory and name it 'tape20'
 prefix = ""

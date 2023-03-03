@@ -82,4 +82,11 @@ def MT_to_label(MT: int, short: bool):
         else:
             return MT_dict[MT][1] if MT_dict[MT][1] is not None else MT_dict[MT][0]
     else:
+        print(f"WARNING: MT{MT} not found in MT_dict")
         return f"MT{MT}"
+
+
+# print("")
+# for MT_key in MT_dict.keys():
+#     print(f"python data_sampler_v3.py --MT {MT_key}", end="; ")
+# print("\n")
