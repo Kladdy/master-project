@@ -27,6 +27,7 @@ from pathlib import Path
 import openmc
 import re
 import argparse
+from multiprocessing import Pool
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--MT", help = "MT value (2, 51, 102, etc.) to perturb. Use None for all MTs", type=int, default=None)
@@ -36,7 +37,7 @@ args = parser.parse_args()
 # Parameters
 TEMPERATURES = [900.0] # K, make sure input1 and input2 have the correct temperatures
 NUCLEIDE = "F19" # MAT = 925 for F19, make sure input1 and input2 have the correct MAT
-SAMPLES = 1000 # number of samples to generate
+SAMPLES = 100 # number of samples to generate
 PROCESSES = 60 # number of worker processes
 MT = args.MT # MT number to sample, None if all MTs should be sampled (2=elastic scattering, 102=neutron capture)
 endf_dir = "/home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6"
@@ -48,7 +49,7 @@ if MT is not None:
 # Check if output directory exists, and if it does, ask if it should be overwritten (unless --force is used)
 if os.path.isdir(output_dir):
     amount_of_files_in_output_dir = len(os.listdir(output_dir))
-    if args.force:
+    if args.force or amount_of_files_in_output_dir == 0:
         print(f"Output directory {output_dir} already exists (with {amount_of_files_in_output_dir} files), but will be overwritten")
     else:
         print(f"Output directory {output_dir} already exists (with {amount_of_files_in_output_dir} files), do you want to overwrite it? (y/n)")
@@ -114,26 +115,43 @@ os.system(tape30_command)
 # Step 4: cp tape20 tape95
 os.system(f"cp tape20 tape95")
 
-# Step 4-8 must be performed once per sample
-for i in range(SAMPLES):
-    
-    # Step 5: cp tape30-1 tape96
-    os.system(f"cp tape30-{i+1} tape96")
+# Step 5-8 must be performed once per sample
+def handle_sample(i):
+    print(f"Handing sample {i+1}")
+
+    # Create temp directory for the current sample
+    tmp_dir = f"tmp-{i+1}"
+    os.makedirs(tmp_dir, exist_ok=True)
+
+    # Copy the relevant files to temp dir
+    os.system(f"cp tape30-{i+1} {tmp_dir}/tape30")
+    os.system(f"cp input2 {tmp_dir}/input2")
+    os.system(f"cp tape95 {tmp_dir}/tape95")
+
+    # Step 5: cp tape30 tape96
+    os.system(f"cp {tmp_dir}/tape30 {tmp_dir}/tape96")
 
     # Step 6: ~/NJOY21/bin/njoy21 -i input2
-    input2_command = "/usr/local/NJOY21/bin/njoy21 -i input2"
+    input2_command = f"cd {tmp_dir}; /usr/local/NJOY21/bin/njoy21 -i input2"
     print(f"Running command: {input2_command}")
     os.system(input2_command)
 
     # Step 7: Convert the created ACE file tape70 to HDF5 with OpenMC
     ace_file = f"tape70"
-    ace_command = f"openmc-ace-to-hdf5 {ace_file} -d {output_dir}/tmp-{i+1} --libver earliest"
+    ace_command = f"openmc-ace-to-hdf5 {tmp_dir}/{ace_file} -d {output_dir}/tmp-{i+1} --libver earliest"
     print(f"Running command: {ace_command}")
     os.system(ace_command)
 
     # Step 8: Rename the created HDF5 file to F19-{i}.h5
     os.system(f"mv {output_dir}/tmp-{i+1}/F19.h5 {output_dir}/F19-{i+1}.h5")
     os.system(f"rm -r {output_dir}/tmp-{i+1}")
+
+    # Cleanup temp dir
+    os.system(f"rm -rf {tmp_dir}")
+    print(f"Finished with sample {i+1}")
+
+with Pool(PROCESSES) as p:
+    results = list(p.imap(handle_sample, range(SAMPLES)))
 
 
 
