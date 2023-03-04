@@ -37,8 +37,8 @@ args = parser.parse_args()
 # Parameters
 TEMPERATURES = [900.0] # K, make sure input1 and input2 have the correct temperatures
 NUCLEIDE = "F19" # MAT = 925 for F19, make sure input1 and input2 have the correct MAT
-SAMPLES = 100 # number of samples to generate
-PROCESSES = 60 # number of worker processes
+SAMPLES = 1000 # number of samples to generate
+PROCESSES = 40 # number of worker processes
 MT = args.MT # MT number to sample, None if all MTs should be sampled (2=elastic scattering, 102=neutron capture)
 endf_dir = "/home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6"
 output_dir = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v3"
@@ -67,6 +67,7 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Remove all tapes from the current directory
 os.system("rm ./tape*")
+os.system("rm ./tmp-*")
 
 # Preparation: Copy the endf file to the current directory and name it 'tape20'
 prefix = ""
