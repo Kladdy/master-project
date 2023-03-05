@@ -31,15 +31,6 @@
 # reaction_107mt: 107label: (n,a)Q_value: -1523000center_of_mass: 0redundant: 0
 # reaction_301mt: 301label: heatingQ_value: 0center_of_mass: 1redundant: 1
 
-# MT_dict = {
-#     2: ("(n,elastic)", "elastic scattering"),
-#     16: "(n,2n)",
-#     22: "(n,na)",
-#     28: "(n,np)",
-#     102: ("(n,$\gamma$)", "neutron capture"),
-# ...
-# }
-
 MT_dict = {
     2: ("(n,elastic)", "elastic scattering"),
     16: ("(n,2n)", "two neutrons"),
@@ -94,4 +85,12 @@ def MT_to_label(MT: int, short: bool):
 # print("")
 # for MT_key in MT_dict.keys():
 #     print(f"python run.py --MT {MT_key}")
+# print("\n")
+
+# print("")
+# for k, v in MT_dict.items():
+#     if v[1] is not None:
+#         print(f"MT{k}, {v[0]} ({v[1]})")
+#     else:
+#         print(f"MT{k}, {v[0]}")
 # print("\n")
