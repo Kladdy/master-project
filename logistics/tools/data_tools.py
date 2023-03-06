@@ -65,6 +65,8 @@ def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_o
         print(f"{NEUTRON_TEMP}")
         if MT is not None:
             print(f"Sampling {endf_tools.MT_to_label(MT, True)} (MT{MT})")
+        else: 
+            print(f"Sampling all MTs")
         print(f"Based on {len(df)} runs")
         print(f" -- k_eff --")
         print(f"k_eff: \t\t{k_eff_mean:.3f}")
@@ -74,8 +76,8 @@ def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_o
         print(f"σ_stat_mean: \t{sigma_stat_mean:.2e}")
         # print(f"σ2_ND: \t\t{sigma2_ND:.2e}")
         print(f"σ_ND: \t\t{sigma_ND:.2e}")
-        print(f"R_sampled: \t{(R_obs*1e5):.1f} pcm")
-        print(f"R_not_sampled: \t{(R_stat_mean*1e5):.1f} pcm")
+        print(f"R_obs: \t\t{(R_obs*1e5):.1f} pcm")
+        print(f"R_stat_mean: \t{(R_stat_mean*1e5):.1f} pcm")
         print(f"R_ND: \t\t{(R_ND*1e5):.1f} pcm")
         print(f" -- ρ --")
         print(f"ρ: \t\t{(u_rho.nominal_value*1e5):.1f} pcm")
