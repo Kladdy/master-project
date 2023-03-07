@@ -33,7 +33,8 @@
 
 MT_dict = {
     2: ("(n,elastic)", "elastic scattering"),
-    16: ("(n,2n)", "two neutrons"),
+    4: ("(n,inelastic)", "inelastic scattering"),
+    16: ("(n,2n)", "two neutron production"),
     22: ("(n,na)", None),
     28: ("(n,np)", None),
     51: ("(n,n1)", None),
@@ -59,10 +60,10 @@ MT_dict = {
     71: ("(n,n21)", None),
     91: ("(n,nc)", None),
     102: ("(n,$\gamma$)", "neutron capture"),
-    103: ("(n,p)", "proton emission"),
-    104: ("(n,d)", "deuteron emission"),
-    105: ("(n,t)", "triton emission"),
-    107: ("(n,a)", "alpha emission"),
+    103: ("(n,p)", "proton production"),
+    104: ("(n,d)", "deuteron production"),
+    105: ("(n,t)", "triton production"),
+    107: ("(n,a)", "alpha production"),
     301: ("heating", None),
 }
 
