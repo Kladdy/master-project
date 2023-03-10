@@ -103,6 +103,7 @@ def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_o
 
     if MT is not None:
         results['MT'] = MT
+        results['MT_label'] = endf_tools.MT_to_label(MT, True)
 
     return results
 
