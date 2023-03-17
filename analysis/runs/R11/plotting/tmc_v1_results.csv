@@ -1,0 +1,12 @@
+MT,Label,$\sigma_{\rho}$ [pcm] (thermal),Linear contribution (thermal),Squared contribution (thermal),tikz_circle_thermal,$\sigma_{\rho}$ [pcm] (epithermal),Linear contribution (epithermal),Squared contribution (epithermal),tikz_circle_epithermal
+,Non-sampled,61.5,100.0,100.0,\ratingthermal{100.0},213.4,100.0,100.0,\ratingepithermal{100.0}
+2,"(n,elastic)",28.6,46.5,21.6,\ratingthermal{21.6},155.8,73.0,53.3,\ratingepithermal{53.3}
+4,"(n,inelastic)",9.3,15.1,2.3,\ratingthermal{2.3},113.1,53.0,28.1,\ratingepithermal{28.1}
+16,"(n,2n)",5.5,9.0,0.8,\ratingthermal{0.8},16.7,7.8,0.6,\ratingepithermal{0.6}
+22,"(n,na)",10.1,16.4,2.7,\ratingthermal{2.7},18.6,8.7,0.8,\ratingepithermal{0.8}
+28,"(n,np)",9.9,16.1,2.6,\ratingthermal{2.6},15.1,7.1,0.5,\ratingepithermal{0.5}
+102,"(n,$\gamma$)",34.1,55.4,30.7,\ratingthermal{30.7},53.4,25.0,6.2,\ratingepithermal{6.2}
+103,"(n,p)",11.0,17.8,3.2,\ratingthermal{3.2},19.9,9.3,0.9,\ratingepithermal{0.9}
+104,"(n,d)",5.7,9.3,0.9,\ratingthermal{0.9},15.5,7.2,0.5,\ratingepithermal{0.5}
+105,"(n,t)",10.1,16.5,2.7,\ratingthermal{2.7},16.7,7.8,0.6,\ratingepithermal{0.6}
+107,"(n,a)",42.7,69.4,48.2,\ratingthermal{48.2},138.5,64.9,42.1,\ratingepithermal{42.1}
