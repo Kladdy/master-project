@@ -107,4 +107,80 @@ def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_o
 
     return results
 
-        
+def perform_TMC_v3(df: pd.DataFrame, FAST_REACTOR: bool, print_output: bool = True, expected_N_ITERATIONS: int = None):
+    NEUTRON_TEMP = "EPITHERMAL" if FAST_REACTOR else "THERMAL"
+
+    # Filters
+    df = df[df["fast_reactor"] == FAST_REACTOR]
+    df_sampled = df[df["use_sampled_data"] == True]
+    df_not_sampled = df[df["use_sampled_data"] == False]
+
+    if len(df_sampled) == 0:
+        print(f"No data for {NEUTRON_TEMP} (sampled)")
+        return None
+    
+    if len(df_not_sampled) == 0:
+        print(f"No data for {NEUTRON_TEMP} (not sampled)")
+        return None
+    
+    if expected_N_ITERATIONS is not None:
+        if len(df_sampled) != expected_N_ITERATIONS:
+            print(f"WARNING: Expected {expected_N_ITERATIONS} sampled iterations, but found {len(df_sampled)} for {NEUTRON_TEMP}")
+        if len(df_not_sampled) != expected_N_ITERATIONS:
+            print(f"WARNING: Expected {expected_N_ITERATIONS} non-sampled iterations, but found {len(df_not_sampled)} for {NEUTRON_TEMP}")
+    
+    # Calculations
+    sigma_sampled = np.std(df_sampled["k-eff"], ddof=1)
+    sigma2_sampled = sigma_sampled**2
+    sigma_not_sampled = np.std(df_not_sampled["k-eff"], ddof=1)
+    sigma2_not_sampled = sigma_not_sampled**2
+    sigma2_ND = sigma2_sampled - sigma2_not_sampled
+    sigma_ND = np.sqrt(sigma2_ND)
+    k_eff_mean = np.mean(df["k-eff"])
+
+    R_sampled = sigma_sampled / k_eff_mean
+    R_not_sampled = sigma_not_sampled / k_eff_mean
+    R_ND = sigma_ND / k_eff_mean
+
+    u_k = ufloat(k_eff_mean, sigma_ND)
+    u_rho = 1 - 1/u_k
+
+    # Output
+    if print_output:
+        print("TMC analysis v3")
+        print("===============")
+        print(f"{NEUTRON_TEMP}")
+        print(f"Based on {len(df_sampled)} sampled runs")
+        print(f"and {len(df_not_sampled)} non-sampled runs")
+        print(f" -- k_eff --")
+        print(f"k_eff: \t\t{k_eff_mean:.3f}")
+        print(f"σ_sampled: \t{sigma_sampled:.2e}")
+        print(f"σ_not_sampled: \t{sigma_not_sampled:.2e}")
+        print(f"σ_ND: \t\t{sigma_ND:.2e}")
+        print(f"R_sampled: \t{(R_sampled*1e5):.1f} pcm")
+        print(f"R_not_sampled: \t{(R_not_sampled*1e5):.1f} pcm")
+        print(f"R_ND: \t\t{(R_ND*1e5):.1f} pcm")
+        print(f" -- ρ --")
+        print(f"ρ: \t\t{(u_rho.nominal_value*1e5):.1f} pcm")
+        print(f"ρ-std: \t\t{(u_rho.std_dev*1e5):.1f} pcm")
+
+    # Put results in a dict
+    results = {
+        'sigma_sampled': sigma_sampled,
+        'sigma2_sampled': sigma2_sampled,
+        'sigma_not_sampled': sigma_not_sampled,
+        'sigma2_not_sampled': sigma2_not_sampled,
+        'sigma_ND': sigma_ND,
+        'sigma2_ND': sigma2_ND,
+        'k_eff_mean': k_eff_mean,
+        'R_sampled': R_sampled,
+        'R_not_sampled': R_not_sampled,
+        'R_ND': R_ND,
+        'u_k': u_k,
+        'u_rho': u_rho,
+        'N_ITERATIONS_sampled': len(df_sampled),
+        'N_ITERATIONS_not_sampled': len(df_not_sampled),
+        'fast_reactor': FAST_REACTOR,
+    }
+
+    return results

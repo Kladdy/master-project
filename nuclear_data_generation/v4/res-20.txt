@@ -1,0 +1,1 @@
+Finished in 8014 seconds, 7999 seconds for step 1, 15 seconds for step 2 and 3
