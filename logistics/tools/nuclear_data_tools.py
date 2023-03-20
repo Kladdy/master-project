@@ -21,6 +21,7 @@ def restore_F19_h5():
     if os.path.exists(old_h5):
         os.system(f"rm {old_h5}")
     os.system(f"cp {old_h5}.tmp {old_h5}")
+    print(f"Restored {old_h5} from {old_h5}.tmp")
 
 def get_sampled_F19_h5(filepath: str):
     old_h5 = os.path.join(data_folder, 'F19.h5')
