@@ -1,0 +1,9 @@
+gamgamadjust  9 20 3.90
+rvadjust p 1.03
+avadjust p 1.03
+rvadjust a 1.05
+avadjust a 1.05
+gnadjust 9 20 0.90
+gpadjust 9 20 0.90
+cstrip a 0.8
+cknock a 0.8
