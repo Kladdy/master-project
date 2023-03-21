@@ -50,6 +50,6 @@ def load_run_settings_json(path: str):
     return data
 
 
-def get_all_result_dirs():
-    result_folders = [name for name in os.listdir("../results") if os.path.isdir(f"../results/{name}")]
+def get_all_result_dirs(dir_prefix: str = "../"):
+    result_folders = [name for name in os.listdir(f"{dir_prefix}results") if os.path.isdir(f"{dir_prefix}results/{name}")]
     return result_folders
