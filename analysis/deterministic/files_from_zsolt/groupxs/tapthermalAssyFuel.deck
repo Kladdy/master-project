@@ -1,0 +1,91 @@
+set title "TAP-like reactor"
+%%%
+%%% This deck implements a TAP-like reactor based on public information
+%%%
+%%% toggle cell core 0 fill CoreLattice1 -core_cyl for different core lattice
+
+
+pin  F
+mat_fuel
+
+pin M
+mat_moderator 1.15
+mat_clad 1.25
+mat_fuel
+
+%assemblies
+
+lat A1 1 0 0 7 7 3.0
+F F F F F F F
+F M M M M M F
+F M M M M M F
+F M M M M M F
+F M M M M M F
+F M M M M M F
+F F F F F F F
+
+lat A2 1 0 0 7 7 3.0
+F F F F F F F
+F F F F F F F
+F F M F M F F
+F F F F F F F
+F F M F M F F
+F F F F F F F
+F F F F F F F
+
+lat A3 1 0 0 7 7 3.0
+F F F F F F F
+F F F F F F F
+F F F F F F F
+F F F F F F F
+F F F F F F F
+F F F F F F F
+F F F F F F F
+
+surf s_assy sqc 0 0 7.5
+cell s_assy 0 fill A3 -s_assy
+cell rest  0 outside s_assy
+
+set bc 2
+
+
+%MATERIALS
+
+mat mat_fuel -5.01 tmp 901 %add burn and vol if needed
+U-235.09c -3.11e-2
+U-238.09c -5.909e-1
+Li-7.09c  -4.8358e-2
+Li-6.09c  -2.418e-6
+F-19.09c  -3.2964e-1
+
+mat mat_moderator -5.66 tmp 901 
+Zr-90.09c  -4.9793e-1
+Zr-91.09c  -1.0980e-1
+Zr-92.09c  -1.6967e-1
+Zr-94.09c  -1.7569e-1
+Zr-96.09c  -2.8908e-2
+H-1.09c    -1.8007e-2
+H-2.09c    -4.1389e-6
+
+%TODO: check whether ZrH has S(a,b)
+
+mat mat_clad -3.21 tmp 901
+C-12.09c  -2.9936e-1
+Si-28.09c -6.4365e-1
+Si-29.09c -3.3866e-2
+Si-30.09c -2.3120e-2
+
+%SETTINGS
+set acelib "/home/elter/jeff31.xsdata"
+set declib "/usr/local/SERPENT/endf-b-vi-8_decay.dat"
+set nfylib "/usr/local/SERPENT/endf-b-vi-8_nfpy.dat"
+
+set power 400000000 %400 MW TODO: check
+set pop 10000 200 40
+
+
+%PLOT
+plot 31 1500 1500 10.0 -30 30 -30 30
+plot 21 1000 1000 4.5 -30 30 -30 30
+
+

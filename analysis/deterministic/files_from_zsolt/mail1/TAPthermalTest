@@ -1,0 +1,57 @@
+! TAP Thermal input data
+! NODE SIZE = X
+
+! Mode card
+%MODE
+FORWARD
+
+! Case card
+%CASE
+TapThermalTes
+First Test
+
+! Cross-sections card
+%XSEC
+2  2    ! Number of groups and number of materials
+! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
+0.313862  0.0066   0.0044  0.00177    1.0   0.3415   2.38969E-07
+0.337513  0.0582   0.1089  0.0447     0.0   0.0204   0.25236   ! MAT1 : Only fuel
+!
+0.325556  0.0075   0.005   0.002      1.0   0.6243   0.021
+0.784022  0.0573   0.095   0.039      0.0   0.0037   1.13998   ! MAT2 : Moderated fuel, scatter not updated yet
+%GEOM
+10 10 22         !nx, ny, nz
+10*15.0    !x-direction assembly size in cm
+10*2         !x-direction assembly divided into 2 (10 cm each)
+10*15.0    !y-direction assembly size in cm
+10*2        !y-direction assembly divided into 2 (10 cm each)
+25.0 20*15.0 25.0       !z-direction assembly  in cm
+22*1           !z-direction nodal is not divided
+2              !np number of planar type
+1  20*2  1     !planar assignment (from bottom to top)
+! Planar_type_1 (Plena)
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 0
+ 1 1 1 1 1 1 1 1 1 0
+ 1 1 1 1 1 1 1 1 0 0
+ 1 1 1 1 1 1 0 0 0 0 
+ 1 1 1 1 1 0 0 0 0 0
+ 1 1 1 0 0 0 0 0 0 0
+! Planar_type_2 (Fuel)
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 1 0
+ 2 2 2 2 2 2 2 1 1 0
+ 2 2 2 2 2 2 2 1 0 0
+ 2 2 2 2 2 1 0 0 0 0 
+ 2 2 2 2 1 0 0 0 0 0
+ 1 1 1 0 0 0 0 0 0 0
+ ! Boundary conditions (east), (west), (north), (south), (bottom), (top)
+1 2 2 1 1 1
+
+%OUTP
