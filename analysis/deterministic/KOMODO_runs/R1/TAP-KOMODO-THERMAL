@@ -1,0 +1,63 @@
+! TAP Thermal input data
+! NODE SIZE = X
+
+! Mode card
+%MODE
+FORWARD
+
+! Case card
+%CASE
+TapThermalTes
+First Test
+
+! Cross-sections card (from THERMAL OpenMC MGXS)
+%XSEC
+2  2    ! Number of groups and number of materials
+! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
+0.326927  0.0066   0.0044  0.0018     1.0   0.3203   0.0000   ! MAT1 : Only fuel
+0.350725  0.0580   0.1082  0.0446     0.0   0.0127   0.2760   ! MAT1 : Only fuel
+! 
+! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
+0.404427  0.0075   0.0051  0.0021     1.0   0.3770   0.0199   ! MAT2 : Moderated fuel
+1.044268  0.0644   0.1063  0.0438     0.0   0.0012   0.9787   ! MAT2 : Moderated fuel
+! 
+
+%GEOM
+10 10 22         !nx, ny, nz
+10*15.0    !x-direction assembly size in cm
+10*2         !x-direction assembly divided into 2 (10 cm each)
+10*15.0    !y-direction assembly size in cm
+10*2        !y-direction assembly divided into 2 (10 cm each)
+25.0 20*15.0 25.0       !z-direction assembly  in cm
+22*1           !z-direction nodal is not divided
+2              !np number of planar type
+1  20*2  1     !planar assignment (from bottom to top)
+! Planar_type_1 (Plena)
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 0
+ 1 1 1 1 1 1 1 1 1 0
+ 1 1 1 1 1 1 1 1 0 0
+ 1 1 1 1 1 1 1 0 0 0 
+ 1 1 1 1 1 1 0 0 0 0
+ 1 1 1 1 0 0 0 0 0 0
+! Planar_type_2 (Fuel)
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 2 1
+ 2 2 2 2 2 2 2 2 1 0
+ 2 2 2 2 2 2 2 1 1 0
+ 2 2 2 2 2 2 2 1 0 0
+ 2 2 2 2 2 1 1 0 0 0 
+ 2 2 2 2 1 1 0 0 0 0
+ 1 1 1 1 0 0 0 0 0 0
+ ! Boundary conditions (east), (west), (north), (south), (bottom), (top)
+1 2 2 1 1 1
+
+!%ITER
+!1200 5 1.e-5 1.e-5 15 40 20 80 ! 5 inner iterations per outer, and fission extrapolate every 15 outer iterations
+
+%OUTP
