@@ -14,12 +14,12 @@ First Test
 %XSEC
 2  2    ! Number of groups and number of materials
 ! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
-0.326848  0.0066   0.0044  0.0018     1.0   0.3204   0.0000   ! MAT1 : Only fuel
-0.353246  0.0614   0.1278  0.0457     0.0   0.0119   0.2882   ! MAT1 : Only fuel
+0.326949  0.0066   0.0044  0.0018     1.0   0.3203   0.0000   ! MAT1 : Only fuel
+0.310723  0.0646   0.1042  0.0561     0.0   0.0137   0.2471   ! MAT1 : Only fuel
 ! 
 ! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
-0.404226  0.0075   0.0051  0.0021     1.0   0.3770   0.0199   ! MAT2 : Moderated fuel
-1.043996  0.0644   0.1063  0.0438     0.0   0.0012   0.9782   ! MAT2 : Moderated fuel
+0.404278  0.0075   0.0051  0.0021     1.0   0.3771   0.0199   ! MAT2 : Moderated fuel
+1.043846  0.0644   0.1062  0.0438     0.0   0.0012   0.9795   ! MAT2 : Moderated fuel
 ! 
 
 %GEOM
