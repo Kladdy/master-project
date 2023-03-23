@@ -24,6 +24,8 @@ def get_mean_and_std_from_mgxs(df: pd.DataFrame, rxn_type: str, material_label: 
 def get_XSEC_card_from_mgxs(dfs: list[pd.DataFrame], df_fuel_only: pd.DataFrame, 
                             material_labels: list[str], comment: str = "",
                             do_perturbations: bool = False):
+    rng = np.random.default_rng()
+    
     # Prepare the KOMODO input
 
     assert len(dfs)+1 == len(material_labels), "The amount of labels must be equal to the amount of dataframes + 1 (the one extra is for the fuel-only data)"
@@ -50,7 +52,11 @@ def get_XSEC_card_from_mgxs(dfs: list[pd.DataFrame], df_fuel_only: pd.DataFrame,
     # For each group, add the corresponding data for the fuel and the moderated fuel
     material_labels = ["MAT1 : Only fuel", "MAT2 : Moderated fuel"]
     for df_material, material_label in zip([df_fuel_only, *dfs], material_labels):
-        XSEC_card += f"\n! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2\n"
+        # XSEC_card += f"\n! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2\n"
+        XSEC_card += f"\n! {'sigtr':>11} {'siga':>13} {'nu*sigf':>13} {'sigf':>13} {'chi':>13}"
+        for group in range(1, n_groups+1):
+            XSEC_card += f" {'sigs_g'+str(group):>13}"
+        XSEC_card += "\n"
 
         for group in range(1, n_groups+1):
             correct_group_in = df_material["group in"] == group
@@ -73,14 +79,15 @@ def get_XSEC_card_from_mgxs(dfs: list[pd.DataFrame], df_fuel_only: pd.DataFrame,
             # Add the perturbations, if requested
             if do_perturbations:
                 # Perturb the cross sections according to the standard deviation, assuming a normal distribution
-                sigtr = np.random.normal(sigtr, sigtr_std)
-                siga = np.random.normal(siga, siga_std)
-                nu_sigf = np.random.normal(nu_sigf, nu_sigf_std)
-                sigf = np.random.normal(sigf, sigf_std)
-                chi = np.random.normal(chi, chi_std)
-                scatter_sigs = [np.random.normal(sigs, sigs_std) for sigs, sigs_std in zip(scatter_sigs, scatter_sigs_std)]
+                sigtr = rng.normal(sigtr, sigtr_std)
+                siga = rng.normal(siga, siga_std)
+                nu_sigf = rng.normal(nu_sigf, nu_sigf_std)
+                sigf = rng.normal(sigf, sigf_std)
+                chi = rng.normal(chi, chi_std)
+                scatter_sigs = [rng.normal(sigs, sigs_std) for sigs, sigs_std in zip(scatter_sigs, scatter_sigs_std)]
             
-            XSEC_card += f"{sigtr:8.6f}  {siga:6.4f}   {nu_sigf:6.4f}  {sigf:6.4f}     {chi:3.1f}   {'   '.join([f'{sigs:6.4f}' for sigs in scatter_sigs])}   ! {material_label}\n"
+            # XSEC_card += f"{sigtr:8.6f}  {siga:6.4f}   {nu_sigf:6.4f}  {sigf:6.4f}     {chi:3.1f}   {'   '.join([f'{sigs:6.4f}' for sigs in scatter_sigs])}   ! {material_label}\n"
+            XSEC_card += f"{sigtr:.7E} {siga:.7E} {nu_sigf:.7E} {sigf:.7E} {chi:.7E} {' '.join([f'{sigs:.7E}' for sigs in scatter_sigs])}   ! {material_label}\n"
 
         XSEC_card += "! "
 

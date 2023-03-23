@@ -10,17 +10,7 @@ FORWARD
 TapThermalTes
 First Test
 
-! Cross-sections card (from THERMAL OpenMC MGXS)
-%XSEC
-2  2    ! Number of groups and number of materials
-! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
-0.326887  0.0066   0.0044  0.0018     1.0   0.3203   0.0000   ! MAT1 : Only fuel
-0.366470  0.0513   0.1085  0.0469     0.0   0.0096   0.2341   ! MAT1 : Only fuel
-! 
-! sigtr   siga     nu*sigf sigf       chi   sigs_g1  sigs_g2
-0.404420  0.0075   0.0051  0.0021     1.0   0.3769   0.0199   ! MAT2 : Moderated fuel
-1.044595  0.0644   0.1062  0.0438     0.0   0.0012   0.9793   ! MAT2 : Moderated fuel
-! 
+%XSEC-PLACEHOLDER
 
 %GEOM
 10 10 22         !nx, ny, nz

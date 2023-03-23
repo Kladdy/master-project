@@ -114,3 +114,23 @@ def plot_histogram_from_df(df: pd.DataFrame, data_key: str, linewidth: float = 0
             return plt.gcf(), popt, pcov
 
     return plt.gcf()
+
+def plot_2d_heatmap_from_array(array: np.ndarray, title: str, x_label: str, y_label: str,
+                               fmt: str = ".3f", cmap: str = 'viridis', filename: str = None,
+                               square: bool = False,  annot: bool = True, fontsize: int = 6,
+                               cbar_label: str = None):
+    
+    # Plot the heatmap
+    ax = sns.heatmap(array, annot=annot, fmt=fmt, cmap=cmap, annot_kws={"size": fontsize}, cbar_kws={'label': cbar_label})
+    ax.invert_yaxis()
+    plt.title(title)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    if square:
+        plt.axis("square")
+    plt.tight_layout()
+
+    if filename is not None:
+        plt.savefig(filename)
+
+    return plt.gcf()
