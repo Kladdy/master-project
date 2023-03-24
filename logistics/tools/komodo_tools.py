@@ -3,7 +3,8 @@ import numpy as np
 import time
 
 def run_komodo(KOMODO_input_path: str):
-    KOMODO_command = f"~/KOMODO/komodo {KOMODO_input_path}"
+    # KOMODO_command = f"~/KOMODO/komodo {KOMODO_input_path}"
+    KOMODO_command = f"/home/fne23_stjarnholm/komodo-test/KOMODO/komodo {KOMODO_input_path}" # This komodo install has more decimals for the power output
     print(f"Running KOMODO with the command: {KOMODO_command}")
     os.system(KOMODO_command)
 
