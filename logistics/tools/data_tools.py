@@ -19,29 +19,28 @@ def add_reactivity_to_df(df: pd.DataFrame, include_std: bool = True):
 
     return df
 
-def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_output: bool = True, expected_N_ITERATIONS: int = None):
+def perform_TMC_v1(df: pd.DataFrame, REACTOR_MODEL: str, MT: int = None, print_output: bool = True, expected_N_ITERATIONS: int = None):
     USE_SAMPLED_DATA = True
-    NEUTRON_TEMP = "EPITHERMAL" if FAST_REACTOR else "THERMAL"
 
     # Filters
-    df = df[df["fast_reactor"] == FAST_REACTOR]
+    df = df[df["reactor_model"] == REACTOR_MODEL]
     df = df[df["use_sampled_data"] == USE_SAMPLED_DATA]
     if MT is not None:
         df = df[df["MT"] == MT]
 
     if len(df) == 0:
         if MT is not None: 
-            print(f"No data for {NEUTRON_TEMP}, {endf_tools.MT_to_label(MT, True)} (MT{MT})")
+            print(f"No data for {REACTOR_MODEL}, {endf_tools.MT_to_label(MT, True)} (MT{MT})")
         else: 
-            print(f"No data for {NEUTRON_TEMP}")
+            print(f"No data for {REACTOR_MODEL}")
         return None
     
     if expected_N_ITERATIONS is not None:
         if len(df) != expected_N_ITERATIONS:
             if MT is not None:
-                print(f"WARNING: Expected {expected_N_ITERATIONS} iterations, but found {len(df)} for {NEUTRON_TEMP} {endf_tools.MT_to_label(MT, True)} (MT{MT})")
+                print(f"WARNING: Expected {expected_N_ITERATIONS} iterations, but found {len(df)} for {REACTOR_MODEL} {endf_tools.MT_to_label(MT, True)} (MT{MT})")
             else:
-                print(f"WARNING: Expected {expected_N_ITERATIONS} iterations, but found {len(df)} for {NEUTRON_TEMP}")
+                print(f"WARNING: Expected {expected_N_ITERATIONS} iterations, but found {len(df)} for {REACTOR_MODEL}")
 
     # Calculations
     sigma_obs = np.std(df["k-eff"], ddof=1)
@@ -63,7 +62,7 @@ def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_o
     if print_output:
         print("TMC analysis v1")
         print("===============")
-        print(f"{NEUTRON_TEMP}")
+        print(f"{REACTOR_MODEL}")
         if MT is not None:
             print(f"Sampling {endf_tools.MT_to_label(MT, True)} (MT{MT})")
         else: 
@@ -99,7 +98,7 @@ def perform_TMC_v1(df: pd.DataFrame, FAST_REACTOR: bool, MT: int = None, print_o
         'u_k': u_k,
         'u_rho': u_rho,
         'N_ITERATIONS': len(df),
-        'fast_reactor': FAST_REACTOR,
+        'reactor_model': REACTOR_MODEL,
     }
 
     if MT is not None:
