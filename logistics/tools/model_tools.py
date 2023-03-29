@@ -111,7 +111,7 @@ def get_pin_universe(CORE_HEIGHT, MODERATOR_R, CLADDING_R, material_fuel, materi
     cell_all_fuel = openmc.Cell(name="outer", fill=material_fuel)
     universe_outer = openmc.Universe(cells=(cell_all_fuel,))
 
-    return universe_pin, universe_outer
+    return universe_pin, universe_outer, cell_fuel, cell_moderator, cell_cladding
 
 def get_inner_lattice(LATTICE_PITCH_INNER, LATTICE_ELEMENTS_INNER, REACTOR_MODEL, universe_pin, universe_outer):
     if REACTOR_MODEL not in AVAILABLE_REACTOR_MODELS:
@@ -199,7 +199,7 @@ def get_outer_lattice(LATTICE_PITCH_OUTER, LATTICE_ELEMENTS_OUTER, CORE_HEIGHT,
     geometry = openmc.Geometry([cell_main, cell_plenum])
     geometry.export_to_xml()
 
-    return geometry
+    return geometry, cell_main, cell_plenum
 
 def get_plots(REACTOR_MODEL, geometry, material_fuel, material_moderator, material_cladding):
     PLOT_COLOR_BY = 'material'
