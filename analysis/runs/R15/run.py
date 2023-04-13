@@ -60,8 +60,8 @@ ACTIVE_BATCH_COUNT = 300
 # FAST_REACTOR = True # True if epithermal, False if thermal
 DO_PLOT = False
 
-# for REACTOR_MODEL in [model_tools.THERMAL_REACTOR, model_tools.EPITHERMAL_REACTOR, model_tools.SEMIEPITHERMAL_REACTOR]:
-for REACTOR_MODEL in [model_tools.SEMIEPITHERMAL_REACTOR]:
+for REACTOR_MODEL in [model_tools.THERMAL_REACTOR, model_tools.EPITHERMAL_REACTOR]:
+# for REACTOR_MODEL in [model_tools.SEMIEPITHERMAL_REACTOR]:
 
     # Materials
     material_fuel, material_moderator, material_cladding = model_tools.get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP)
