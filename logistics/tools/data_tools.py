@@ -107,27 +107,26 @@ def perform_TMC_v1(df: pd.DataFrame, REACTOR_MODEL: str, MT: int = None, print_o
 
     return results
 
-def perform_TMC_v3(df: pd.DataFrame, FAST_REACTOR: bool, print_output: bool = True, expected_N_ITERATIONS: int = None):
-    NEUTRON_TEMP = "EPITHERMAL" if FAST_REACTOR else "THERMAL"
-
+def perform_TMC_v3(df: pd.DataFrame, REACTOR_MODEL: str, print_output: bool = True, expected_N_ITERATIONS: int = None):
+    
     # Filters
-    df = df[df["fast_reactor"] == FAST_REACTOR]
+    df = df[df["reactor_model"] == REACTOR_MODEL]
     df_sampled = df[df["use_sampled_data"] == True]
     df_not_sampled = df[df["use_sampled_data"] == False]
 
     if len(df_sampled) == 0:
-        print(f"No data for {NEUTRON_TEMP} (sampled)")
+        print(f"No data for {REACTOR_MODEL} (sampled)")
         return None
     
     if len(df_not_sampled) == 0:
-        print(f"No data for {NEUTRON_TEMP} (not sampled)")
+        print(f"No data for {REACTOR_MODEL} (not sampled)")
         return None
     
     if expected_N_ITERATIONS is not None:
         if len(df_sampled) != expected_N_ITERATIONS:
-            print(f"WARNING: Expected {expected_N_ITERATIONS} sampled iterations, but found {len(df_sampled)} for {NEUTRON_TEMP}")
+            print(f"WARNING: Expected {expected_N_ITERATIONS} sampled iterations, but found {len(df_sampled)} for {REACTOR_MODEL}")
         if len(df_not_sampled) != expected_N_ITERATIONS:
-            print(f"WARNING: Expected {expected_N_ITERATIONS} non-sampled iterations, but found {len(df_not_sampled)} for {NEUTRON_TEMP}")
+            print(f"WARNING: Expected {expected_N_ITERATIONS} non-sampled iterations, but found {len(df_not_sampled)} for {REACTOR_MODEL}")
     
     # Calculations
     sigma_sampled = np.std(df_sampled["k-eff"], ddof=1)
@@ -149,7 +148,7 @@ def perform_TMC_v3(df: pd.DataFrame, FAST_REACTOR: bool, print_output: bool = Tr
     if print_output:
         print("TMC analysis v3")
         print("===============")
-        print(f"{NEUTRON_TEMP}")
+        print(f"{REACTOR_MODEL}")
         print(f"Based on {len(df_sampled)} sampled runs")
         print(f"and {len(df_not_sampled)} non-sampled runs")
         print(f" -- k_eff --")

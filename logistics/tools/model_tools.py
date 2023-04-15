@@ -230,3 +230,13 @@ def get_plots(REACTOR_MODEL, geometry, material_fuel, material_moderator, materi
     plotXZ.pixels = PLOT_PIXELS
     plotXZ.colors = colors
     plotXZ.to_ipython_image()
+
+    # vox_plot = openmc.Plot.from_geometry(geometry)
+    # vox_plot.type = 'voxel'
+    # vox_plot.width = (100., 100., 50.)
+    # vox_plot.pixels = (40, 40, 20)
+    # vox_plot.color_by = PLOT_COLOR_BY
+    # vox_plot.colors = colors
+    # vox_plot.filename = f'vox_plot-{REACTOR_MODEL}'
+    # plots = openmc.Plots([vox_plot])
+    # plots.export_to_xml()
