@@ -47,7 +47,7 @@ outer_lattice_string_semiepithermal =    """F F  F  F  F  F  F  F  F  F  F  F  F
                                             F F  F  F  F  F  A1 A2 A1 A2 A2 A1 A2 A1 F  F  F  F  F  F
                                             F F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F"""
 
-def get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP):
+def get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP, use_thermal_scattering: bool = True):
     # Fuel
     material_fuel = openmc.Material(1, "ULiF", temperature=FUEL_TEMP)
     material_fuel.add_nuclide('U235', 3.11e-2, 'wo')
@@ -76,7 +76,8 @@ def get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP):
     material_moderator.add_nuclide('H2', 4.1389e-6, 'wo')
     material_moderator.set_density('g/cm3', 5.66)
 
-    material_moderator.add_s_alpha_beta('c_H_in_ZrH') # DID NOT EXIST AT OR NEAR 900 K
+    if use_thermal_scattering:
+        material_moderator.add_s_alpha_beta('c_H_in_ZrH') # DID NOT EXIST AT OR NEAR 900 K
 
     # Create Materials list and export to XML
     mats = openmc.Materials([material_fuel, material_cladding, material_moderator])
