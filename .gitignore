@@ -175,7 +175,14 @@ RUNDATA_*
 /nuclear_data_generation/v3/tape*
 /nuclear_data_generation/v3/tmp*
 
+/nuclear_data_generation/v5/tape*
+/nuclear_data_generation/v5/tmp*
+
 /nuclear_data_generation/v4/F019*
+
+/nuclear_data_generation/v7/tape*
+/nuclear_data_generation/v7/tmp*
+
 
 /analysis/deterministic/KOMODO_runs/R*/TAP-KOMODO-*
 analysis/deterministic/KOMODO_runs/R1/TAP-KOMODO-*

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 # Sample data with SANDY
-# - v1
-# - Date: 9 feb 2023
+# - v6
+# - Date: 8 may 2023
 # - Based on sample_sandy from the OpenMC data repository
+# Now being used to sample JEFF-4T2 as it did not contain MF33...
 
 # Run as 
-# python sample_with_sandy.py --samples 10 -n F19 -l /Users/sigge/nuclear_data/JEFF33-n-endf6 -d /Users/sigge/nuclear_data/sandy_samples_v1
+# python sample_with_sandy.py --samples 10 -n F19 -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_samples_v1
 # python sample_with_sandy.py -p 32 --samples 1000 -n F19  -l /home/fne23_stjarnholm/nuclear_data/JEFF33-n-endf6 -d /home/fne23_stjarnholm/nuclear_data/sandy_samples_v1
 
 import argparse
@@ -93,7 +94,8 @@ format_only = args.format_only
 # prefix = "n-"
 # suffix = ".endf"
 prefix = ""
-suffix = ".jeff33"
+suffix = ".jeff4T2"
+# suffix = ".jeff33"
 
 atomic_dict = openmc.data.ATOMIC_NUMBER
 nuc_dict = {}
@@ -141,6 +143,7 @@ if not format_only:
         )
         os.chdir(nuc_dir_endf)
         sandy_command = f"sandy {nuc_dict[nuc]['file_name']} --samples {args.samples} --outname {nuc} --processes {args.processes}"
+        print(f"Running command:", sandy_command)
         os.system(sandy_command)
 
     os.chdir(script_dir)

@@ -1,0 +1,399 @@
+conda activate base
+(openmc-env) [fne23_stjarnholm@galactica v5]$ conda activate base
+(base) [fne23_stjarnholm@galactica v5]$ ls
+data_sampler_v5.py  input1  input2  JEFF-3.3.tape20  tape20  tape21  tape22  tape23  tape24  tape25  tape26  tape30  tape45  tape95
+(base) [fne23_stjarnholm@galactica v5]$ python data_sampler_v5.py 
+Traceback (most recent call last):
+  File "/home/fne23_stjarnholm/master-project/nuclear_data_generation/v5/data_sampler_v5.py", line 28, in <module>
+    import openmc
+ModuleNotFoundError: No module named 'openmc'
+(base) [fne23_stjarnholm@galactica v5]$ openmc-env
+(openmc-env) [fne23_stjarnholm@galactica v5]$ loadavg
+host              high prio      low prio         total
+-------------------------------------------------------
+galactica            35.4 %         0.0 %        35.4 %
+apollo               14.3 %         0.0 %        14.3 %  (max = 6400 %)
+starbuck             20.0 %         0.0 %        20.0 %  (max = 6400 %)
+adama                 9.5 %         0.0 %         9.5 %  (max = 6400 %)
+roslin             5560.0 %         0.0 %      5560.0 %  (max = 6400 %)
+caprica              14.3 %         0.0 %        14.3 %  (max = 3200 %)
+gaius                15.0 %         0.0 %        15.0 %  (max = 3200 %)
+(openmc-env) [fne23_stjarnholm@galactica v5]$ starbuck 
+(openmc-env) [fne23_stjarnholm@starbuck v5]$ python data_sampler_v5.py 
+Output directory /home/fne23_stjarnholm/nuclear_data/sandy_samples_v5 already exists (with 0 files), but will be overwritten
+rm: cannot remove ‘./tmp-*’: No such file or directory
+Running command: /usr/local/NJOY21/bin/njoy21 -i input1
+
+ +++,    +++`         '++'    `#@@@@;   ,@@@      +@@@    '@@@@+        .;@
+ @@@@    @@@:         @@@@   @@@@@@@@@   @@@;     @@@#  .@@@@@@@@+   @@@@@@
+ @@@@    @@@:         @@@@   @@@@@@@@@@  @@@@    ;@@@   @@@@@@@@@@   @@@@@@
+ @@@@#   @@@:         @@@@  '@@@@@@@@@@  ,@@@    @@@@   @@@@@@@@@@`  @@@@@@
+ @@@@@   @@@:         @@@@  +@@@   .@@@   @@@@   @@@.   @@@,   @@@.  +:@@@@
+ @@@@@   @@@:         @@@@  +@@@   `@@@   #@@@  @@@@    @@@`   @@@.    @@@@
+ @@@@@@  @@@:         @@@@  +@@@   `@@@    @@@, @@@+    @@@`   @@@.    @@@@
+ @@@@@@  @@@:         @@@@  +@@@   `@@@    @@@@,@@@     ...    @@@.    @@@@
+ @@@@@@. @@@:         @@@@  +@@@   `@@@    `@@@@@@@            @@@.    @@@@
+ @@@@@@@ @@@:         @@@@  +@@@   `@@@     @@@@@@`          :@@@@.    @@@@
+ @@@@@@@ @@@:         @@@@  +@@@   `@@@     '@@@@@         .@@@@@@.    @@@@
+ @@@@+@@:@@@:         @@@@  +@@@   `@@@      @@@@;       `@@@@@@@;     @@@@
+ @@@@ @@@@@@:         @@@@  +@@@   `@@@      @@@@       @@@@@@@+       @@@@
+ @@@@ @@@@@@:         @@@@  +@@@   `@@@      #@@@       @@@@@#         @@@@
+ @@@@ ;@@@@@:  ```    @@@@  +@@@   `@@@      #@@@       @@@@           @@@@
+ @@@@  @@@@@:  @@@+   @@@@  +@@@   `@@@      #@@@       @@@`           @@@@
+ @@@@  @@@@@:  @@@+   @@@@  +@@@   `@@@      #@@@       @@@`   '''     @@@@
+ @@@@  ,@@@@:  @@@@   @@@@  +@@@   .@@@      #@@@       @@@`   @@@.    @@@@
+ @@@@   @@@@:  @@@@@@@@@@@  '@@@@@@@@@@      #@@@       @@@@@@@@@@.    @@@@
+ @@@@   @@@@:  @@@@@@@@@@:   @@@@@@@@@@      #@@@       @@@@@@@@@@.    @@@@
+ @@@@   `@@@:   @@@@@@@@@    #@@@@@@@@       #@@@       @@@@@@@@@@.    @@@@
+ @@@+    @@@.    :@@@@#,       ;++++,        .+++       ++++++++++     ;+++
+
+===========================================================================
+
+
+ moder...change the mode of an endf tape or njoy output tape              0.0s
+
+ moder...                                                                 0.0s
+
+ input unit (+ for coded, - for bb) ...         20
+ output unit (+ for coded, - for bb) ..        -21
+
+ tape label
+ --------------------------------------
+  JEFF-4T2 Incident Neutron File                                      
+
+ using endf-6 format
+                                                                          0.5s
+ *****************************************************************************
+
+ reconr...reconstruct pointwise cross sections in pendf format            0.5s
+
+ reconr...                                                                0.5s
+
+ unit for endf tape ...................        -21
+ unit for pendf tape ..................        -22
+
+ label for pendf tape
+ ------------------------------------------------------------------
+ processing of an example nuclide.                                   
+
+ tape label
+ ------------------------------------------------------------------
+ JEFF-4T2 Incident Neutron File                                      
+
+ material to be processed .............        925
+ reconstruction tolerance .............      0.001
+ reconstruction temperature ...........       0.00k
+ resonance-integral-check tolerance ...      0.010
+ max resonance-integral error .........  5.000E-08
+
+ descriptive cards for pendf tape
+ ------------------------------------------------------------------
+ ENDF data processed with NJOY.                                      
+ 
+
+ processing mat  925 in endf-6 format
+ ------------------------------------------------------------------
+   9-F - 19 JAERI      EVAL-JUL89 T.SUGI                             
+
+ resonance range information
+ ----------------------------------
+ ier     energy-range     lru lrf  method
+  1  1.000E-05 1.000E+05   1   2   normal
+   samm max legendre order:  0
+
+ mat has no unresolved resonance parameters
+
+ changed threshold from 1.098540E+07 to 1.098545E+07 for mt 16.
+
+ changed threshold from 1.158400E+05 to 1.158403E+05 for mt 51.
+
+ changed threshold from 2.076700E+05 to 2.076700E+05 for mt 52.
+
+ changed threshold from 1.636600E+06 to 1.636612E+06 for mt 55.
+
+ changed threshold from 4.610100E+06 to 4.610114E+06 for mt 60.
+
+ number of user and resonance nodes           =      12
+ points in initial unionized grid             =    1776
+ points added by linearization                =     342                   0.6s
+
+               estimated maximum error due to
+               resonance integral check (errmax,errint)
+
+    upper      elastic   percent   capture   percent   fission   percent
+    energy     integral   error    integral   error    integral   error
+  1.00E-05
+  1.00E-04     8.39E+00   0.000    6.58E-01   0.000    0.00E+00   0.000
+  1.00E-03     8.39E+00   0.000    2.08E-01   0.000    0.00E+00   0.000
+  1.00E-02     8.39E+00   0.000    6.58E-02   0.000    0.00E+00   0.000
+  1.00E-01     8.39E+00   0.000    2.08E-02   0.009    0.00E+00   0.000
+  1.00E+00     8.39E+00   0.000    6.58E-03   0.084    0.00E+00   0.000
+  2.00E+00     2.52E+00   0.000    8.92E-04   0.000    0.00E+00   0.000
+  5.00E+00     3.34E+00   0.000    7.92E-04   0.000    0.00E+00   0.000
+  1.00E+01     2.52E+00   0.000    3.99E-04   0.000    0.00E+00   0.000
+  2.00E+01     2.52E+00   0.000    2.83E-04   0.000    0.00E+00   0.000
+  5.00E+01     3.34E+00   0.000    2.52E-04   0.000    0.00E+00   0.000
+  1.00E+02     2.52E+00   0.000    1.28E-04   0.000    0.00E+00   0.000
+  2.00E+02     2.52E+00   0.000    9.17E-05   0.000    0.00E+00   0.000
+  5.00E+02     3.34E+00   0.000    8.41E-05   0.000    0.00E+00   0.000
+  1.00E+03     2.52E+00   0.000    4.56E-05   0.000    0.00E+00   0.000
+  2.00E+03     2.52E+00   0.000    3.66E-05   0.000    0.00E+00   0.000
+  5.00E+03     3.33E+00   0.000    4.34E-05   0.000    0.00E+00   0.000
+  1.00E+04     2.51E+00   0.000    3.89E-05   0.000    0.00E+00   0.000
+  2.00E+04     2.51E+00   0.000    8.97E-05   0.000    0.00E+00   0.000
+  5.00E+04     7.57E+00   0.000    1.20E-02   0.000    0.00E+00   0.000
+
+ points added by resonance reconstruction     =     653
+ points affected by resonance integral check  =      35
+ final number of resonance points             =    1152
+ number of points in final unionized grid     =    2771
+                                                                          0.6s
+ *****************************************************************************
+
+ broadr...doppler broadening of endf data                                 0.6s
+
+ broadr...                                                                0.6s
+
+ unit for input endf tape .............        -21
+ unit for input pendf tape ............        -22
+ unit for output pendf tape ...........        -23
+ material to be processed .............        925
+ number of final temperatures .........          1
+ restart (0 no, 1 yes) ................          0
+ bootstrap (0 no, 1 yes) ..............          0
+ starting material temperature ........        0.0k
+ thinning tolerance ...................      0.001
+ max. energy ..........................  6.500E+06
+ errmax for thinning ..................  1.000E-02
+ errint for thinning ..................  5.000E-08
+ final temperatures ...................  9.000E+02
+
+
+ files are in endf-6 format
+
+ resolved resonance range upper limit         =    1.00000E+05 eV.
+
+ final maximum energy for broadening/thinning =    1.00000E+05 eV
+                                                                          0.6s
+
+ broadened mat 925 from  0.0000E+00 to  9.0000E+02 k
+         points in=   2771  points out=   2439
+         mt   2 102
+                                                                          0.8s
+ *****************************************************************************
+
+ unresr...calculation of unresolved resonance cross sections              0.8s
+
+ unresr...                                                                0.8s
+
+ unit for input endf tape .............        -21
+ unit for input pendf tape ............        -23
+ unit for output pendf tape ...........        -24
+
+ temperatures .........................  9.000E+02
+
+ sigma zero values ....................  1.000E+10
+                                         1.000E+04
+                                         1.000E+03
+                                         1.000E+02
+                                         1.000E+01
+                                         1.000E+00
+ print option (0 min., 1 max.) ........          1
+
+ mat =  925    temp =  9.000E+02                                          0.8s
+
+ ---message from unresr---mat  925 has no unresolved parameters
+                          copy as is to nout
+
+                                                                          0.8s
+ *****************************************************************************
+
+ thermr...compute thermal scattering cross sections and distributions     0.8s
+
+ thermr...                                                                0.8s
+
+ unit for endf tape ...................          0
+ unit for input pendf tape ............        -24
+ unit for output pendf tape ...........        -25
+
+ material to be processed (endf) ......          0
+ material to be processed (pendf) .....        925
+ number of angle bins .................         20
+ number of temperatures ...............          1
+ inelastic option .....................          1
+ elastic option .......................          0
+ MF6 format option ....................          0
+ number of principal atoms ............          1
+ reference mt .........................        221
+ print option (0 min, 1 max) ..........          1
+ temperatures (kelvin) ................ 9.0000E+02
+ tolerance ............................ 1.0000E-03
+ max energy for thermal treatment ..... 1.0000E+01
+
+ endf uses endf-5 format
+
+ pendf uses endf-6 format
+
+ wrote thermal data for temp = 9.0000E+02                                 9.0s
+
+ wrote thermal data for temp = 9.0000E+02                                 9.0s
+                                                                          9.0s
+ *****************************************************************************
+
+ purr...probabalistic unresolved calculation                              9.0s
+
+ purr...                                                                  9.0s
+ unit for input endf tape .............        -21
+ unit for input pendf tape ............        -25
+ unit for output pendf tape ...........        -26
+ temperatures .........................  9.000E+02
+ sigma zero values ....................   infinity
+                                         1.000E+04
+                                         1.000E+03
+                                         1.000E+02
+                                         1.000E+01
+                                         1.000E+00
+ number of probability bins ...........         20
+ number of resonance ladders ..........         32
+ print option (0=min, 1=max) ..........          1
+ no. of energy points (0=all) .........          0
+
+ mat =  925                                                               9.0s
+
+ mat =  925                                                               9.0s
+
+ ---message from purr---mat  925 has no unresolved parameters
+                          copy as is to nout
+
+                                                                          9.0s
+*****************************************************************************
+
+ moder...change the mode of an endf tape or njoy output tape              9.0s
+
+ moder...                                                                 9.0s
+
+ input unit (+ for coded, - for bb) ...        -26
+ output unit (+ for coded, - for bb) ..         30
+
+ tape label
+ --------------------------------------
+  processing of an example nuclide.                                   
+
+ using endf-6 format
+                                                                         13.6s
+ *****************************************************************************
+
+ errorr...produce cross section covariances                              13.6s
+
+ errorr...                                                               13.6s
+
+ unit for endf tape ...................        -21
+ unit for pendf tape ..................        -26
+ unit for input gendf tape ............          0
+ unit for output covariance tape ......         45
+ unit for input covariance tape .......          0
+ unit for ratio-to-standard tape ......          0
+ material to be processed .............        925
+ neutron group option .................          3
+ weight function option ...............          6
+ print option (0 min, 1 max) ..........          1
+ rel. cov. option (0 abs, 1 rel) ......          1
+ group av. print option (0 min, 1 max)           0
+ temperature ..........................      900.0
+ read option (0 calc, 1 read, 2 combo)           0
+ endf covariance file to be processed .         33
+ irespr processing option for mf=33 ...          1
+
+ using endf-6 format
+ resonance range information
+ ----------------------------------
+ ier     energy-range     lru lrf  method
+  1  1.000E-05 1.000E+05   1   2   normal
+
+ ---message from errorr---no data on file for mfcov= 33
+                          processing terminated
+                                                                         13.6s
+ *****************************************************************************
+
+ covr...process covariance data                                          13.6s
+
+ covr...                                                                 13.6s
+
+ unit for input covariance tape .......         45
+ unit for output covariance tape ......          0
+ unit for plot output .................         55
+ icolor ...............................          1
+ rel. cov. option (0=abs/1=rel) .......          1
+ ncase ................................          4
+ legend option (-1=first/0=all/1=none)           0
+ starting fig. no. (0=omit fig. nos.) .          1
+ no. subdivisions of each shade .......          1
+ minimum energy to be plotted .........  0.000E+00
+
+            mat      mt      mat1      mt1
+           ----     ---      ----      ---
+            925       1       925        1
+            925       1       925        2
+            925       2       925        2
+            925       2       925        4
+At line 532 of file /usr/local/NJOY21/bin/_deps/njoy-src/src/endf.f90 (unit = 45, file = 'tape45')
+Fortran runtime error: End of file
+Running command: sandy tape30  --cov tape45 --seed33 1 --samples 1 --processes 1
+ERROR:  file 'tape45' not in a known format
+Handing sample 1
+cp: cannot stat ‘tape30-1’: No such file or directory
+cp: cannot stat ‘tmp-1/tape30’: No such file or directory
+Running command: cd tmp-1; /usr/local/NJOY21/bin/njoy21 -i input2
+
+ +++,    +++`         '++'    `#@@@@;   ,@@@      +@@@    '@@@@+        .;@
+ @@@@    @@@:         @@@@   @@@@@@@@@   @@@;     @@@#  .@@@@@@@@+   @@@@@@
+ @@@@    @@@:         @@@@   @@@@@@@@@@  @@@@    ;@@@   @@@@@@@@@@   @@@@@@
+ @@@@#   @@@:         @@@@  '@@@@@@@@@@  ,@@@    @@@@   @@@@@@@@@@`  @@@@@@
+ @@@@@   @@@:         @@@@  +@@@   .@@@   @@@@   @@@.   @@@,   @@@.  +:@@@@
+ @@@@@   @@@:         @@@@  +@@@   `@@@   #@@@  @@@@    @@@`   @@@.    @@@@
+ @@@@@@  @@@:         @@@@  +@@@   `@@@    @@@, @@@+    @@@`   @@@.    @@@@
+ @@@@@@  @@@:         @@@@  +@@@   `@@@    @@@@,@@@     ...    @@@.    @@@@
+ @@@@@@. @@@:         @@@@  +@@@   `@@@    `@@@@@@@            @@@.    @@@@
+ @@@@@@@ @@@:         @@@@  +@@@   `@@@     @@@@@@`          :@@@@.    @@@@
+ @@@@@@@ @@@:         @@@@  +@@@   `@@@     '@@@@@         .@@@@@@.    @@@@
+ @@@@+@@:@@@:         @@@@  +@@@   `@@@      @@@@;       `@@@@@@@;     @@@@
+ @@@@ @@@@@@:         @@@@  +@@@   `@@@      @@@@       @@@@@@@+       @@@@
+ @@@@ @@@@@@:         @@@@  +@@@   `@@@      #@@@       @@@@@#         @@@@
+ @@@@ ;@@@@@:  ```    @@@@  +@@@   `@@@      #@@@       @@@@           @@@@
+ @@@@  @@@@@:  @@@+   @@@@  +@@@   `@@@      #@@@       @@@`           @@@@
+ @@@@  @@@@@:  @@@+   @@@@  +@@@   `@@@      #@@@       @@@`   '''     @@@@
+ @@@@  ,@@@@:  @@@@   @@@@  +@@@   .@@@      #@@@       @@@`   @@@.    @@@@
+ @@@@   @@@@:  @@@@@@@@@@@  '@@@@@@@@@@      #@@@       @@@@@@@@@@.    @@@@
+ @@@@   @@@@:  @@@@@@@@@@:   @@@@@@@@@@      #@@@       @@@@@@@@@@.    @@@@
+ @@@@   `@@@:   @@@@@@@@@    #@@@@@@@@       #@@@       @@@@@@@@@@.    @@@@
+ @@@+    @@@.    :@@@@#,       ;++++,        .+++       ++++++++++     ;+++
+
+===========================================================================
+
+
+ moder...change the mode of an endf tape or njoy output tape              0.0s
+
+ moder...                                                                 0.0s
+
+ input unit (+ for coded, - for bb) ...         95
+ output unit (+ for coded, - for bb) ..        -21
+
+ tape label
+ --------------------------------------
+  JEFF-4T2 Incident Neutron File                                      
+
+ using endf-6 format
+                                                                          0.5s
+ *****************************************************************************
+
+ moder...change the mode of an endf tape or njoy output tape              0.5s
+
+ moder...                                                                 0.5s
+At line 212 of file /usr/local/NJOY21/bin/_deps/njoy-src/src/util.f90 (unit = 96)
+Fortran runtime error: Cannot open file 'tape96': No such file or directory
+Running command: openmc-ace-to-hdf5 tmp-1/tape70 -d /home/fne23_stjarnholm/nuclear_data/sandy_samples_v5/tmp-1 --libver earliest
+/home/fne23_stjarnholm/miniconda3/envs/openmc-env/bin/openmc-ace-to-hdf5:50: UserWarning: ACE library 'tmp-1/tape70' does not exist.
+  warnings.warn(f"ACE library '{path}' does not exist.")
+mv: cannot stat ‘/home/fne23_stjarnholm/nuclear_data/sandy_samples_v5/tmp-1/F19.h5’: No such file or directory
+Finished with sample 1
+(openmc-env) [fne23_stjarnholm@starbuck v5]$ 

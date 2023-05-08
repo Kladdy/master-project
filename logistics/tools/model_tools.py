@@ -47,7 +47,7 @@ outer_lattice_string_semiepithermal =    """F F  F  F  F  F  F  F  F  F  F  F  F
                                             F F  F  F  F  F  A1 A2 A1 A2 A2 A1 A2 A1 F  F  F  F  F  F
                                             F F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F  F"""
 
-def get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP, use_thermal_scattering: bool = True):
+def get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP, use_thermal_scattering: bool = True, use_C0: bool = True):
     # Fuel
     material_fuel = openmc.Material(1, "ULiF", temperature=FUEL_TEMP)
     material_fuel.add_nuclide('U235', 3.11e-2, 'wo')
@@ -59,7 +59,10 @@ def get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP, use_thermal_scatteri
 
     # Cladding
     material_cladding = openmc.Material(3, "CSi", temperature=CLADDING_TEMP)
-    material_cladding.add_nuclide('C0', 2.9936e-1, 'wo')
+    if use_C0:
+        material_cladding.add_nuclide('C0', 2.9936e-1, 'wo')
+    else:
+        material_cladding.add_nuclide('C12', 2.9936e-1, 'wo')
     material_cladding.add_nuclide('Si28', 6.4365e-1, 'wo')
     material_cladding.add_nuclide('Si29', 3.3866e-2, 'wo')
     material_cladding.add_nuclide('Si30', 2.3120e-2, 'wo')
