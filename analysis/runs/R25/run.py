@@ -1,6 +1,11 @@
-# - Date: 8/5/2023
+# - Date: 11/05/2023
 # - Based on: Model v3
-# - Description: Same as R15 but now using sampled ENDF/B-VIII.0 instead of JEFF-3.3 for the F-19 data (rest is still JEFF)
+# - Description: Same as R15, but reduce moderator density of thermal reactor such that the total mass
+# of moderator is the same in thermal and epithermal
+# Zsolts comment:
+# this comment of yours on the possible reason for the uncertainty dependence being the fuel fraction. 
+# Im wondering that if you take the thermal system, and artifically reduce the moderator density 
+# so that total moderator mass is the same as for the epithermal system, then what will be the outcome.
 
 import openmc
 import numpy as np
@@ -14,11 +19,6 @@ import time
 import random
 
 import argparse
-
-# Run this before:
-# "export OPENMC_CROSS_SECTIONS=/home/fne23_stjarnholm/nuclear_data/endfb-viii.0-hdf5/cross_sections.xml"
-# print out OPENMC_CROSS_SECTIONS env variable
-print(f"OPENMC_CROSS_SECTIONS: {os.getenv('OPENMC_CROSS_SECTIONS')}")
 
 parser = argparse.ArgumentParser()
 # parser.add_argument("--MT", help = "MT value (2, 51, 102, etc.) to sample from", type=int, required=False)
@@ -64,10 +64,19 @@ ACTIVE_BATCH_COUNT = 300
 # FAST_REACTOR = True # True if epithermal, False if thermal
 DO_PLOT = False
 
-for REACTOR_MODEL in [model_tools.THERMAL_REACTOR, model_tools.SEMIEPITHERMAL_REACTOR, model_tools.EPITHERMAL_REACTOR]:
+for REACTOR_MODEL in [model_tools.THERMAL_REACTOR]:
+# for REACTOR_MODEL in [model_tools.THERMAL_REACTOR, model_tools.EPITHERMAL_REACTOR]:
+# for REACTOR_MODEL in [model_tools.SEMIEPITHERMAL_REACTOR]:
+
+    if REACTOR_MODEL != model_tools.THERMAL_REACTOR:
+        raise Exception("This run (R25) is only for thermal reactors")
 
     # Materials
-    material_fuel, material_moderator, material_cladding = model_tools.get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP, use_C0=False)
+    material_fuel, material_moderator, material_cladding = model_tools.get_materials(FUEL_TEMP, CLADDING_TEMP, MODERATOR_TEMP)
+    material_moderator.set_density('g/cm3', material_moderator.density * 4 / 25)
+    print(f"Moderator density: {material_moderator.density} g/cm3")
+    mats = openmc.Materials([material_fuel, material_cladding, material_moderator])
+    mats.export_to_xml() # Need to export again, to update the density
 
     # Pin universe
     universe_pin, universe_outer, cell_fuel, cell_moderator, cell_cladding = model_tools.get_pin_universe(CORE_HEIGHT, MODERATOR_R, CLADDING_R, material_fuel, material_moderator, material_cladding)
@@ -137,7 +146,7 @@ for REACTOR_MODEL in [model_tools.THERMAL_REACTOR, model_tools.SEMIEPITHERMAL_RE
 
         # @@@@@@@@@@@@@@@@@@@@@@ Perturbations @@@@@@@@@@@@@@@@@@@@@@
         if USE_SAMPLED_DATA:
-            new_h5_base_path = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v7"
+            new_h5_base_path = "/home/fne23_stjarnholm/nuclear_data/sandy_samples_v3"
             new_h5_path = f"{new_h5_base_path}/F19-{i+1}.h5"
             if not os.path.exists(new_h5_path):
                 raise Exception(f"File {new_h5_path} does not exist")
